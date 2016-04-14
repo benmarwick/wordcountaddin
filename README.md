@@ -4,7 +4,7 @@
 wordcountaddin
 ==============
 
-This R package is an [RStudio addin](https://rstudio.github.io/rstudioaddins/) to count words and characters in highlighted text in an R markdown document. It also has a function to compute readability statistics.
+This R package is an [RStudio addin](https://rstudio.github.io/rstudioaddins/) to count words and characters in selected text in an R markdown document. It also has a function to compute readability statistics.
 
 It will ignore YAML, code chunks and inline code. It may also ignore parts of your actual text that resemble those things, because my regex is quite simple.
 
