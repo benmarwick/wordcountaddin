@@ -1,4 +1,4 @@
-[![Travis-CI Build Status](https://travis-ci.org/%3CUSERNAME%3E/%3CREPO%3E.svg?branch=master)](https://travis-ci.org/%3CUSERNAME%3E/%3CREPO%3E)
+[![Travis-CI Build Status](https://travis-ci.org/benmarwick/wordcountaddin.svg?branch=master)](https://travis-ci.org/benmarwick/wordcountaddin)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 wordcountaddin
@@ -15,7 +15,7 @@ Inspiration for this addin came from [jadd](https://github.com/jennybc/jadd) and
 How to install
 --------------
 
-Install with `devtools::install_github("benmarwick/wordcountaddin")`
+Install with `devtools::install_github("benmarwick/wordcountaddin",  type = "source")`
 
 Go to `Tools > Addins` in RStudio to select and configure addins.
 

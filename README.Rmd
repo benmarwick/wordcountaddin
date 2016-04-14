@@ -4,7 +4,7 @@ output:
     variant: markdown_github
 ---
 
-[![Travis-CI Build Status](https://travis-ci.org/<USERNAME>/<REPO>.svg?branch=master)](https://travis-ci.org/<USERNAME>/<REPO>)
+[![Travis-CI Build Status](https://travis-ci.org/benmarwick/wordcountaddin.svg?branch=master)](https://travis-ci.org/benmarwick/wordcountaddin)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -28,7 +28,7 @@ Inspiration for this addin came from [jadd](https://github.com/jennybc/jadd) and
 
 ## How to install
 
-Install with `devtools::install_github("benmarwick/wordcountaddin")`
+Install with `devtools::install_github("benmarwick/wordcountaddin",  type = "source")`
 
 Go to `Tools > Addins` in RStudio to select and configure addins. 
 
