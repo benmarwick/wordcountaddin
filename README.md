@@ -6,7 +6,7 @@ wordcountaddin
 
 This R package is an [RStudio addin](https://rstudio.github.io/rstudioaddins/) to count words and characters in selected text in an [R markdown](http://rmarkdown.rstudio.com/) document. It also has a function to compute readability statistics.
 
-When counting words in your Rmd document, these things will be ignored:
+When counting words in the text of your Rmd document, these things will be ignored:
 
 -   YAML front matter
 -   code chunks and inline code
@@ -15,7 +15,9 @@ When counting words in your Rmd document, these things will be ignored:
 -   images with captions in this format: `![this is the caption](/path/to/image.png)`
 -   header level indicators such as `#` and `##`, etc.
 
-And because my regex is quite simple, the word count function may also ignore parts of your actual text that resemble these things. The word count will include text in headers, block quotations, verbatim code blocks, tables, raw LaTeX and raw HTML.
+And because my regex is quite simple, the word count function may also ignore parts of your actual text that resemble these things.
+
+The word count will include text in headers, block quotations, verbatim code blocks, tables, raw LaTeX and raw HTML.
 
 Counting words is a complex and inexact process, and there is no canonical method. There are numerous ways to count words using R, depending on how we define a word and a sentence. I've included three methods here, mostly out of curiosity to see how they differ from each other. I use functions from the [stringi](https://cran.r-project.org/web/packages/stringi/index.html), [koRpus](https://cran.r-project.org/web/packages/koRpus/index.html) and [qdap](https://cran.r-project.org/web/packages/qdap/index.html) packages. If you're curious, you can compare the results you get with this addin to an online tool such as <http://wordcounttools.com/>.
 
@@ -31,7 +33,7 @@ Here's a list of the [readability statistics](https://en.wikipedia.org/wiki/Read
 -   Flesch-Kincaid Grade Level
 -   Gunning Frequency of Gobbledygook (FOG)
 -   FORCAST
--   Fucks' Stilcharakteristik
+-   Fucks' Stilcharakteristik (that's his name, it's Wilhelm F.'s "characteristics of style")
 -   Linsear Write
 -   Läsbarhetsindex (LIX)
 -   Neue Wiener Sachtextformeln
@@ -42,7 +44,7 @@ Here's a list of the [readability statistics](https://en.wikipedia.org/wiki/Read
 -   Tuldava's Text Difficulty Formula
 -   Wheeler-Smith
 
-Most of these tests return a value that approximates the years of education required to understand your text. A score of around 10-12 is roughly the reading level on completion of high school in the US. These stats are computed by the [koRpus](https://cran.r-project.org/web/packages/koRpus/index.html). They are, of course, no substitute for critical self-reflection on how effective your writing is at communicating ideas and information. To help with that, read [*Style: Toward Clarity and Grace*](http://www.amazon.com/dp/0226899152).
+Most of these tests return a value that approximates the years of education required to understand your text. A score of around 10-12 is roughly the reading level on completion of high school in the US. These stats are computed by the [koRpus](https://cran.r-project.org/web/packages/koRpus/index.html) package. Readability stats are, of course, no substitute for critical self-reflection on how effective your writing is at communicating ideas and information. To help with that, read [*Style: Toward Clarity and Grace*](http://www.amazon.com/dp/0226899152).
 
 Inspiration for this addin came from [jadd](https://github.com/jennybc/jadd) and [WrapRmd](https://github.com/tjmahr/WrapRmd).
 
@@ -68,4 +70,4 @@ Here's the obligatory demo gif:
 Feedback, contributing, etc.
 ----------------------------
 
-Please note that this project is released with a [Guide to Contributing](CONTRIBUTING.md) and a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please [open an issue](https://github.com/benmarwick/wordcountaddin/issues/new) if you find something that doesn't work as expected. Note that this project is released with a [Guide to Contributing](CONTRIBUTING.md) and a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
