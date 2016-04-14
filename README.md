@@ -18,6 +18,31 @@ And because my regex is quite simple, the word count function may also ignore pa
 
 There are numerous ways to count words using R, depending on how you define a word and a sentence. I've included three methods here, mostly out of curiosity to see how they differ from each other. I use functions from the [stringi](https://cran.r-project.org/web/packages/stringi/index.html), [koRpus](https://cran.r-project.org/web/packages/koRpus/index.html) and [qdap](https://cran.r-project.org/web/packages/qdap/index.html) packages.
 
+Here's a list of the [readability statistics](https://en.wikipedia.org/wiki/Readability_test) that this addin will compute for the text in your Rmd document:
+
+-   Automated Readability Index (ARI)
+-   Coleman-Liau
+-   Danielson-Bryan
+-   Dickes-Steiwer's Handformel
+-   Easy Listening Formula
+-   Farr-Jenkins-Paterson
+-   Flesch Reading Ease
+-   Flesch-Kincaid Grade Level
+-   Gunning Frequency of Gobbledygook (FOG)
+-   FORCAST
+-   Fucks' Stilcharakteristik
+-   Linsear Write
+-   Läsbarhetsindex (LIX)
+-   Neue Wiener Sachtextformeln
+-   Readability Index (RIX)
+-   Simple Measure of Gobbledygook (SMOG)
+-   Strain Index
+-   Kuntzsch's Text-Redundanz-Index
+-   Tuldava's Text Difficulty Formula
+-   Wheeler-Smith
+
+Most of these tests return a value that approximates the years of education required to understand your text. A score of around 10-12 is roughly the reading level on completion of high school in the US. These stats are computed by the [koRpus](https://cran.r-project.org/web/packages/koRpus/index.html). They are, of course, no substitute for critical self-reflection on how effective your writing is at communicating ideas and information. To help with that, read [*Style: Toward Clarity and Grace*](http://www.amazon.com/dp/0226899152).
+
 Inspiration for this addin came from [jadd](https://github.com/jennybc/jadd) and [WrapRmd](https://github.com/tjmahr/WrapRmd).
 
 How to install
@@ -32,7 +57,7 @@ How to use
 
 1.  Open a Rmd file in RStudio.
 2.  Select some text, it can include YAML, code chunks and inline code
-3.  Go to `Tools > Addins` in RStudio and click on `Word count` or `Readability`. Computing `Readability` may take a few moments on longer documents.
+3.  Go to `Tools > Addins` in RStudio and click on `Word count` or `Readability`. Computing `Readability` may take a few moments on longer documents because it has to count syllables for some of the stats.
 4.  Look in the console for the output
 
 Feedback, contributing, etc.
