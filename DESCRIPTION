@@ -11,7 +11,7 @@ Description: This packages is an addin for RStudio that will count the words
     how easy or difficult your text is to read.
 License: MIT
 LazyData: TRUE
-Imports:
+Imports: 
     qdap,
     purrr,
     stringi,
@@ -20,3 +20,4 @@ Imports:
     miniUI (>= 0.1.1),
     rstudioapi (>= 0.5)
 RoxygenNote: 5.0.0
+Suggests: testthat
