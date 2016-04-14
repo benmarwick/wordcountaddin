@@ -59,8 +59,8 @@ prep_text <- function(text){
 
 prep_text_qdap <- function(text){
 
-  require(qdap)
-  require(purrr)
+  requireNamespace(qdap)
+  requireNamespace(purrr)
   # prepare for qdap functions
   df <-  data.frame(text.var = text)
   # check_text(df)
@@ -75,7 +75,7 @@ prep_text_qdap <- function(text){
 }
 
 prep_text_korpus <- function(text){
-  require(purrr)
+  requireNamespace(purrr)
   tokenize_safe <- safely(tokenize)
   k1 <- tokenize_safe(text, lang = 'en', format = 'obj')
   k1 <- k1$result
@@ -92,9 +92,9 @@ text_stats_fn <- function(text){
   oldw <- getOption("warn")
   options(warn = -1)
 
-  require(qdap)
-  require(stringi)
-  require(koRpus)
+  requireNamespace(qdap)
+  requireNamespace(stringi)
+  requireNamespace(koRpus)
 
   # qdap methods
   qdap_output <-  prep_text_qdap(text)
@@ -149,10 +149,10 @@ readability_fn <- function(text){
   oldw <- getOption("warn")
   options(warn = -1)
 
-  # require(qdap)
-  # require(purrr)
-  # require(stringi)
-  require(koRpus)
+  # requireNamespace(qdap)
+  # requireNamespace(purrr)
+  # requireNamespace(stringi)
+  requireNamespace(koRpus)
 
   # readability stats
 
