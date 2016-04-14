@@ -22,7 +22,7 @@ This R package is an [RStudio addin](https://rstudio.github.io/rstudioaddins/) t
 
 It will ignore YAML, code chunks and inline code. It may also ignore parts of your actual text that resemble those things, because my regex is quite simple.
 
-There are numerous ways to count words using R. I've included three methods here, mostly out of our curiosity.
+There are numerous ways to count words using R. I've included three methods here, mostly out of curiosity.
 
 Inspiration for this addin came from [jadd](https://github.com/jennybc/jadd) and [WrapRmd](https://github.com/tjmahr/WrapRmd). 
 
