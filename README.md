@@ -13,10 +13,11 @@ When counting words in your Rmd document, these things will be ignored:
 -   text in HTML comment tags: `<!-- text -->`
 -   inline URLs in this format: `[text of link](url)`
 -   images with captions in this format: `![this is the caption](/path/to/image.png)`
+-   header level indicators such as `#` and `##`, etc.
 
-And because my regex is quite simple, the word count function may also ignore parts of your actual text that resemble these things. The word count will include text in block quotations, verbatim code blocks, tables, raw LaTeX and raw HTML.
+And because my regex is quite simple, the word count function may also ignore parts of your actual text that resemble these things. The word count will include text in headers, block quotations, verbatim code blocks, tables, raw LaTeX and raw HTML.
 
-There are numerous ways to count words using R, depending on how you define a word and a sentence. I've included three methods here, mostly out of curiosity to see how they differ from each other. I use functions from the [stringi](https://cran.r-project.org/web/packages/stringi/index.html), [koRpus](https://cran.r-project.org/web/packages/koRpus/index.html) and [qdap](https://cran.r-project.org/web/packages/qdap/index.html) packages.
+Counting words is a complex and inexact process, and there is no canonical method. There are numerous ways to count words using R, depending on how we define a word and a sentence. I've included three methods here, mostly out of curiosity to see how they differ from each other. I use functions from the [stringi](https://cran.r-project.org/web/packages/stringi/index.html), [koRpus](https://cran.r-project.org/web/packages/koRpus/index.html) and [qdap](https://cran.r-project.org/web/packages/qdap/index.html) packages. If you're curious, you can compare the results you get with this addin to an online tool such as <http://wordcounttools.com/>.
 
 Here's a list of the [readability statistics](https://en.wikipedia.org/wiki/Readability_test) that this addin will compute for the text in your Rmd document:
 

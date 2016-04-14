@@ -50,13 +50,16 @@ prep_text <- function(text){
   text <- gsub("<!--.+?-->", "", text)
 
   # don't include LaTeX comments
-  # how to do this?
+  # how to do this? %%
 
   # don't include inline markdown URLs
   text <- gsub("\\(http.+?\\)", "", text)
 
   # don't include images with captions
   text <- gsub("!\\[.+?\\)", "", text)
+
+  # don't include LaTeX \eggs{ham}
+  # how to do? problem with capturing \x
 
 
   if(nchar(text) == 0){
