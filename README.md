@@ -61,6 +61,10 @@ How to use
 3.  Go to `Tools > Addins` in RStudio and click on `Word count` or `Readability`. Computing `Readability` may take a few moments on longer documents because it has to count syllables for some of the stats.
 4.  Look in the console for the output
 
+Here's the obligatory demo gif:
+
+![demo gif](inst/wordcountaddin.gif)
+
 Feedback, contributing, etc.
 ----------------------------
 
