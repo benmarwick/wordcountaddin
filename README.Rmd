@@ -18,11 +18,19 @@ knitr::opts_chunk$set(
 
 # wordcountaddin
 
-This R package is an [RStudio addin](https://rstudio.github.io/rstudioaddins/) to count words and characters in selected text in an R markdown document. It also has a function to compute readability statistics. 
+This R package is an [RStudio addin](https://rstudio.github.io/rstudioaddins/) to count words and characters in selected text in an [R markdown](http://rmarkdown.rstudio.com/) document. It also has a function to compute readability statistics. 
 
-It will ignore YAML, code chunks and inline code. It may also ignore parts of your actual text that resemble those things, because my regex is quite simple.
+When counting words in your Rmd document, these things will be ignored:
 
-There are numerous ways to count words using R. I've included three methods here, mostly out of curiosity. 
+- YAML front matter    
+- code chunks and inline code
+- text in HTML comment tags: `<!-- text -->` 
+- inline URLs in this format: `[text of link](url)`
+- images with captions in this format: `![this is the caption](/path/to/image.png)`
+
+And because my regex is quite simple, the word count function may also ignore parts of your actual text that resemble these things. The word count will include text in block quotations, verbatim code blocks, tables, raw LaTeX and raw HTML. 
+
+There are numerous ways to count words using R, depending on how you define a word and a sentence. I've included three methods here, mostly out of curiosity to see how they differ from each other. I use functions from the  [stringi](https://cran.r-project.org/web/packages/stringi/index.html), [koRpus](https://cran.r-project.org/web/packages/koRpus/index.html) and [qdap](https://cran.r-project.org/web/packages/qdap/index.html) packages.
 
 Inspiration for this addin came from [jadd](https://github.com/jennybc/jadd) and [WrapRmd](https://github.com/tjmahr/WrapRmd). 
 

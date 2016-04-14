@@ -46,6 +46,19 @@ prep_text <- function(text){
   # don't include text in in-line R code
   text <- gsub("`r.+?`", "", text)
 
+  # don't include HTML comments
+  text <- gsub("<!--.+?-->", "", text)
+
+  # don't include LaTeX comments
+  # how to do this?
+
+  # don't include inline markdown URLs
+  text <- gsub("\\(http.+?\\)", "", text)
+
+  # don't include images with captions
+  text <- gsub("!\\[.+?\\)", "", text)
+
+
   if(nchar(text) == 0){
     stop("You have not selected any text. Please select some text with the mouse and try again")
   } else {
@@ -122,7 +135,9 @@ text_stats_fn <- function(text){
 
   # reading time
   # https://en.wikipedia.org/wiki/Words_per_minute#Reading_and_comprehension
-  reading_time <- paste0(round(k_wc / 200, 0), " minutes") # assume 200 words per min
+  reading_time <- round(k_wc / 200, 0) # assume 200 words per min
+  reading_time <- ifelse(reading_time > 1, paste0(reading_time, ' minutes'),
+                         paste0(reading_time, ' minute'))
 
 
   return(list(n_char_tot_stri = n_char_tot,
