@@ -12,6 +12,7 @@ Description: This packages is an addin for RStudio that will count the words
 License: MIT
 LazyData: TRUE
 Imports:
+    knitr,
     qdap,
     purrr,
     stringi,

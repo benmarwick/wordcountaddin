@@ -190,7 +190,7 @@ text_stats_fn <- function(text){
 }
 
 
-readability_fn <- function(text){
+readability_fn_ <- function(text){
 
   text <- prep_text(text)
 
@@ -204,10 +204,17 @@ readability_fn <- function(text){
   k_readability <- koRpus::readability(k1)
 
 
-  return(list(k_readability = k_readability
-              ))
+  return(k_readability)
 
   # resume warnings
   options(warn = oldw)
 }
 
+
+readability_fn <- function(text){
+  # a more condensed overview of the results
+  k_readability <- readability_fn_(text)
+  readability_summary_table <- knitr::kable(summary(k_readability))
+  return(readability_summary_table)
+
+}
