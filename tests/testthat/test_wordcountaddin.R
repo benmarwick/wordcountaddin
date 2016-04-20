@@ -4,7 +4,7 @@ context("Word count")
 # short sentence
 eleven_words <- "here are exactly eleven words of fairly boring and unpunctuated text"
 
-short_stats <-  wordcountaddin:::text_stats_fn(eleven_words)
+short_stats <-  wordcountaddin:::text_stats_fn_(eleven_words)
 # qdap cannot manage without final punct.
 n_words_stri_11 <-short_stats$n_words_stri
 n_words_korp_11 <- short_stats$n_words_korp
@@ -22,7 +22,7 @@ test_that("Word count is correct for short simple sentence", {
 # Moderate: Harvard sentences, https://en.wikipedia.org/wiki/Harvard_sentences
 moderately_complex <- "The birch canoe slid on the smooth planks. Glue the sheet to the dark blue background. It's easy to tell the depth of a well. These days a chicken leg is a rare dish. Rice is often served in round bowls. The juice of lemons makes fine punch. The box was thrown beside the parked truck. The hogs were fed chopped corn and garbage. Four hours of steady work faced us. Large size in stockings is hard to sell."
 
-moderately_complex_stats <- wordcountaddin:::text_stats_fn(moderately_complex)
+moderately_complex_stats <- wordcountaddin:::text_stats_fn_(moderately_complex)
 
 n_char_tot_stri_mc <-  moderately_complex_stats$n_char_tot_stri
 n_char_tot_korp_mc <- moderately_complex_stats$n_char_tot_korp
@@ -65,7 +65,7 @@ Ei vis discere interesset! Mutat 'option' qualisque ius te, sea deserunt loborti
 
 Tota veritus similique ne per, eam fastidii voluptatum eu. Sea tale mandamus suscipiantur ex. Ullum ullamcorper consequuntur et cum, aeque fuisset ut sea! Mea graecis pertinax explicari ne, pri tale hinc no? Eu vidisse nominati eum, et eam hendrerit voluptatum assueverit, qui ne munere recusabo democritum."
 
-filler_stats <- wordcountaddin:::text_stats_fn(filler)
+filler_stats <- wordcountaddin:::text_stats_fn_(filler)
 
 n_char_tot_stri_f <-  filler_stats$n_char_tot_stri
 n_char_tot_korp_f <- filler_stats$n_char_tot_korp
@@ -83,7 +83,7 @@ test_that("Word count is correct for complex sentences in filler text", {
   expect_equal(n_words_qdap_f, 451)
   expect_equal(n_words_stri_f, 450)
   expect_equal(n_words_korp_f, 450)
-  expect_equal(n_sentences_qdap_f, 50)
+  expect_equal(n_sentences_qdap_f, 51)
   expect_equal(n_sentences_korp_f, 52)
 })
 
@@ -126,7 +126,7 @@ plot(pressure)
 
 "
 
-rmd_stats <- wordcountaddin:::text_stats_fn(rmd_text)
+rmd_stats <- wordcountaddin:::text_stats_fn_(rmd_text)
 
 n_char_tot_stri_r <-  rmd_stats$n_char_tot_stri
 n_char_tot_korp_r <- rmd_stats$n_char_tot_korp
@@ -139,11 +139,11 @@ n_sentences_qdap_r <- rmd_stats$n_sentences_qdap
 n_sentences_korp_r <- rmd_stats$n_sentences_korp
 
 test_that("Word count is correct for rmd text", {
-  expect_equal(n_char_tot_stri_r, 115)
-  expect_equal(n_char_tot_korp_r, 116)
-  expect_equal(n_words_qdap_r, 5)
+  expect_equal(n_char_tot_stri_r, 111)
+  expect_equal(n_char_tot_korp_r, 112)
+  expect_equal(n_words_qdap_r, 14)
   expect_equal(n_words_stri_r, 15)
   expect_equal(n_words_korp_r, 15)
-  expect_equal(n_sentences_qdap_r, 1)
+  expect_equal(n_sentences_qdap_r, 2)
   expect_equal(n_sentences_korp_r, 2)
 })

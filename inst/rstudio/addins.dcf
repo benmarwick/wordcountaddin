@@ -1,9 +1,9 @@
 Name: Word count
-Description: Counts words and characters (excluding code chunks and inline code)
+Description: Counts words and characters (excluding code chunks, inline code, etc.)
 Binding: text_stats
 Interactive: true
 
 Name: Readability
-Description: Computes readability statistics (excluding code chunks and inline code)
+Description: Computes readability statistics (excluding code chunks, inline code, etc.)
 Binding: readability
 Interactive: true

@@ -58,6 +58,9 @@ prep_text <- function(text){
   # don't include images with captions
   text <- gsub("!\\[.+?\\)", "", text)
 
+  # don't include # for headings
+  text <- gsub("#*", "", text)
+
   # don't include LaTeX \eggs{ham}
   # how to do? problem with capturing \x
 
@@ -78,11 +81,13 @@ prep_text_qdap <- function(text){
   requireNamespace("qdap")
   requireNamespace("purrr")
   # prepare for qdap functions
-  df <-  data.frame(text.var = text)
+  q_text <-  replace_abbreviation(text)
+  df <-  data.frame(text_var = sent_detect(q_text))
   # check_text(df)
 
   sentSplit_safe <- safely(sentSplit)
-  df_ss <- sentSplit_safe(df, text.var = "text.var")
+  df_ss <- sentSplit_safe(df, text.var = "text_var",
+                          endmarks = c("?", ".", "!","|", ":"))
 
   word_stats_safe <- safely(word_stats)
   df_ws <- word_stats_safe(df_ss$result, digit.remove = TRUE, apostrophe.remove	= TRUE)
@@ -100,15 +105,15 @@ prep_text_korpus <- function(text){
 
 
 # These functions do the actual work
-text_stats_fn <- function(text){
-
-  text <- prep_text(text)
-
-  # qdap gives a lot of warnings!
+text_stats_fn_ <- function(text){
+  # suppress warnings
   oldw <- getOption("warn")
   options(warn = -1)
 
-  requireNamespace("qdap")
+  text <- prep_text(text)
+
+
+requireNamespace("qdap")
   requireNamespace("stringi")
   requireNamespace("koRpus")
 
@@ -118,6 +123,7 @@ text_stats_fn <- function(text){
   # df_ws$ts # word count, char count, syllable count per sentence
   # df_ws$gts # totals
   # basic stats on the text:
+  n_char_tot_qdap <- df_ws$gts$n.char
   n_words_qdap <- df_ws$gts$n.words # -1
   # n_sent <- df_ws$gts$n.sent
   n_sent_qdap <- nrow(qdap_output$df_ss$result)
@@ -138,24 +144,48 @@ text_stats_fn <- function(text){
 
   # reading time
   # https://en.wikipedia.org/wiki/Words_per_minute#Reading_and_comprehension
-  reading_time <- round(k_wc / 200, 0) # assume 200 words per min
-  reading_time <- ifelse(reading_time > 1, paste0(reading_time, ' minutes'),
-                         paste0(reading_time, ' minute'))
+  # assume 200 words per min
+  wpm <-  200
+  reading_time_korp <- paste0(round(k_wc / wpm, 1), " minutes")
+  reading_time_stri <- paste0(round(n_words_stri / wpm, 1), " minutes")
+  reading_time_qdap <- paste0(round(n_words_qdap / wpm, 1), " minutes")
 
 
-  return(list(n_char_tot_stri = n_char_tot,
-              n_char_tot_korp = k_nchr,
-              n_words_stri = n_words_stri,
-              n_words_qdap = n_words_qdap,
-              n_words_korp = k_wc,
-              n_sentences_qdap = n_sent_qdap,
-              n_sentences_korp = k_sent,
-              words_per_sentence_qdap = wps_qdap,
-              words_per_sentence_korp = k_wps,
-              reading_time = reading_time))
+  return(list(
+  # make the names more useful
+  n_char_tot_stri = n_char_tot,
+  n_char_tot_korp = k_nchr,
+  n_char_tot_qdap = n_char_tot_qdap,
+  n_words_korp = k_wc,
+  n_words_stri = n_words_stri,
+  n_words_qdap = n_words_qdap,
+  n_sentences_qdap = n_sent_qdap,
+  n_sentences_korp = k_sent,
+  words_per_sentence_qdap = wps_qdap,
+  words_per_sentence_korp = k_wps,
+  reading_time_korp = reading_time_korp,
+  reading_time_stri = reading_time_stri,
+  reading_time_qdap = reading_time_qdap
+  ))
 
   # resume warnings
   options(warn = oldw)
+
+}
+
+
+text_stats_fn <- function(text){
+
+  l <- text_stats_fn_(text)
+
+  results_df <- data.frame(Method = c("Word count", "Character count", "Sentence count", "Reading time"),
+                           koRpus  = c(l$n_words_korp, l$n_char_tot_korp, l$n_sentences_korp, l$reading_time_korp),
+                           stringi = c(l$n_words_stri, l$n_char_tot_stri, "Not available", l$reading_time_stri),
+                           qdap =    c(l$n_words_qdap, l$n_char_tot_qdap, l$n_sentences_qdap, l$reading_time_qdap)
+                           )
+
+  results_df_tab <- knitr::kable(results_df)
+  return(results_df_tab)
 
 }
 
@@ -167,37 +197,7 @@ readability_fn <- function(text){
   oldw <- getOption("warn")
   options(warn = -1)
 
-  # requireNamespace(qdap)
-  # requireNamespace(purrr)
-  # requireNamespace(stringi)
-  requireNamespace("koRpus")
-
-  # readability stats
-
-  # # qdap methods
-  # df_ss <-  prep_text_qdap(text)
-  #
-  # # https://en.wikipedia.org/wiki/Automated_readability_index
-  # ari_fn <- safely(automated_readability_index)
-  # ari <- ari_fn(df_ss)$result$Readability$Automated_Readability_Index
-  #
-  # # https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests
-  # fk_grd_fn <- safely(flesch_kincaid)
-  # fk_grd <- fk_grd_fn(df_ss)$result$Readability$FK_grd.lvl
-  # fk_ease_fn <- safely(flesch_kincaid)
-  # fk_ease <- fk_ease_fn(df_ss)$result$Readability$FK_read.ease
-  #
-  # # https://en.wikipedia.org/wiki/Coleman%E2%80%93Liau_index
-  # cl_fn <- safely(coleman_liau)
-  # coleman_liau <- cl_fn(df_ss)$result$Readability$Coleman_Liau
-  #
-  # # https://en.wikipedia.org/wiki/Linsear_Write
-  # lw_fn <- safely(linsear_write)
-  # Linsear_Write <- lw_fn(df_ss)$result$Readability$Linsear_Write
-  #
-  # # https://en.wikipedia.org/wiki/SMOG
-  # smog_fn <- safely(SMOG)
-  # sm <- smog_fn(df_ss)$result
+ requireNamespace("koRpus")
 
   # korpus methods
   k1 <- prep_text_korpus(text)
@@ -205,12 +205,6 @@ readability_fn <- function(text){
 
 
   return(list(k_readability = k_readability
-              # automated_readability_index = ari,
-              # Flesch_Kincaid_reading_grade_level = fk_grd,
-              # Flesch_Kincaid_reading_ease = fk_ease,
-              # Coleman_Liau = coleman_liau,
-              # Linsear_Write = Linsear_Write,
-              # SMOG = sm
               ))
 
   # resume warnings
