@@ -126,7 +126,7 @@ text_stats_fn_ <- function(text){
   n_sentences_korp = k_sent,
   words_per_sentence_korp = k_wps,
   reading_time_korp = reading_time_korp,
-  reading_time_stri = reading_time_stri,
+  reading_time_stri = reading_time_stri
   ))
 
   # resume warnings
@@ -141,7 +141,7 @@ text_stats_fn <- function(text){
 
   results_df <- data.frame(Method = c("Word count", "Character count", "Sentence count", "Reading time"),
                            koRpus  = c(l$n_words_korp, l$n_char_tot_korp, l$n_sentences_korp, l$reading_time_korp),
-                           stringi = c(l$n_words_stri, l$n_char_tot_stri, "Not available", l$reading_time_stri),
+                           stringi = c(l$n_words_stri, l$n_char_tot_stri, "Not available", l$reading_time_stri)
                            )
 
   results_df_tab <- knitr::kable(results_df)

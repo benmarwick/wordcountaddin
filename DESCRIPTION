@@ -9,7 +9,7 @@ Description: This packages is an addin for RStudio that will count the words
     documents and will exclude YAML header content, code chunks and inline code from
     the counts. It also computes readability statistics so you can get an idea of
     how easy or difficult your text is to read.
-License: MIT
+License: MIT + file LICENSE
 LazyData: TRUE
 Imports:
     knitr,

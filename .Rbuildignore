@@ -4,3 +4,4 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^CONDUCT\.md$
+^CONTRIBUTING.md$
