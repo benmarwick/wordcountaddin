@@ -13,7 +13,6 @@ License: MIT
 LazyData: TRUE
 Imports:
     knitr,
-    qdap,
     purrr,
     stringi,
     koRpus,

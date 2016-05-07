@@ -24,16 +24,16 @@ The word count will include text in headers, block quotations, verbatim code blo
 
 In general, there are numerous ways to count words, with no widely accepted standard method. The variety of methods is due to differences in the definitions of a word and a sentence.
 
-For this addin I've included three methods, mostly out of curiosity to see how they differ from each other. I use functions from the [stringi](https://cran.r-project.org/web/packages/stringi/index.html), [koRpus](https://cran.r-project.org/web/packages/koRpus/index.html) and [qdap](https://cran.r-project.org/web/packages/qdap/index.html) packages. If you're curious, you can compare the results you get with this addin to an online tool such as <http://wordcounttools.com/>.
+For this addin I've included two methods, mostly out of curiosity to see how they differ from each other. I use functions from the [stringi](https://cran.r-project.org/web/packages/stringi/index.html) and [koRpus](https://cran.r-project.org/web/packages/koRpus/index.html) packages. If you're curious, you can compare the results you get with this addin to an online tool such as <http://wordcounttools.com/>.
 
 The output of the `Word count` function is a markdown table in your R console that might look like this:
 
-    |Method          |koRpus      |stringi       |qdap        |
-    |:---------------|:-----------|:-------------|:-----------|
-    |Word count      |107         |104           |101         |
-    |Character count |604         |603           |442         |
-    |Sentence count  |10          |Not available |7           |
-    |Reading time    |0.5 minutes |0.5 minutes   |0.5 minutes |
+    |Method          |koRpus      |stringi       |
+    |:---------------|:-----------|:-------------|
+    |Word count      |107         |104           |
+    |Character count |604         |603           |
+    |Sentence count  |10          |Not available |
+    |Reading time    |0.5 minutes |0.5 minutes   |
 
 If you want resuse these results in other R functions, you can use an unexported function like this `wordcountaddin:::text_stats_fn_(text)`, where `text` is a character vector of your text (with length one, ie. all your text in a single character string). The output will be a list object, and will include several other items not shown in the markdown table.
 
@@ -85,7 +85,7 @@ Inspiration for this addin came from [jadd](https://github.com/jennybc/jadd) and
 How to install
 --------------
 
-Install with `devtools::install_github("benmarwick/wordcountaddin",  type = "source")`
+Install with `devtools::install_github("benmarwick/wordcountaddin",  type = "source", dependencies = TRUE)`
 
 Go to `Tools > Addins` in RStudio to select and configure addins.
 

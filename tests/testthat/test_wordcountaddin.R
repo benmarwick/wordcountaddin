@@ -27,20 +27,16 @@ moderately_complex_stats <- wordcountaddin:::text_stats_fn_(moderately_complex)
 n_char_tot_stri_mc <-  moderately_complex_stats$n_char_tot_stri
 n_char_tot_korp_mc <- moderately_complex_stats$n_char_tot_korp
 
-n_words_qdap_mc <- moderately_complex_stats$n_words_qdap
 n_words_stri_mc <- moderately_complex_stats$n_words_stri
 n_words_korp_mc <- moderately_complex_stats$n_words_korp
 
-n_sentences_qdap_mc <- moderately_complex_stats$n_sentences_qdap
 n_sentences_korp_mc <- moderately_complex_stats$n_sentences_korp
 
 test_that("Word count is correct for moderately complex sentences", {
   expect_equal(n_char_tot_stri_mc, 406)
   expect_equal(n_char_tot_korp_mc, 407)
-  expect_equal(n_words_qdap_mc, 80)
   expect_equal(n_words_stri_mc, 80)
   expect_equal(n_words_korp_mc, 80)
-  expect_equal(n_sentences_qdap_mc, 10)
   expect_equal(n_sentences_korp_mc, 10)
 })
 
@@ -70,20 +66,16 @@ filler_stats <- wordcountaddin:::text_stats_fn_(filler)
 n_char_tot_stri_f <-  filler_stats$n_char_tot_stri
 n_char_tot_korp_f <- filler_stats$n_char_tot_korp
 
-n_words_qdap_f <- filler_stats$n_words_qdap
 n_words_stri_f <- filler_stats$n_words_stri
 n_words_korp_f <- filler_stats$n_words_korp
 
-n_sentences_qdap_f <- filler_stats$n_sentences_qdap
 n_sentences_korp_f <- filler_stats$n_sentences_korp
 
 test_that("Word count is correct for complex sentences in filler text", {
   expect_equal(n_char_tot_stri_f, 2896)
   expect_equal(n_char_tot_korp_f, 2897)
-  expect_equal(n_words_qdap_f, 451)
   expect_equal(n_words_stri_f, 450)
   expect_equal(n_words_korp_f, 450)
-  expect_equal(n_sentences_qdap_f, 51)
   expect_equal(n_sentences_korp_f, 52)
 })
 
@@ -131,19 +123,15 @@ rmd_stats <- wordcountaddin:::text_stats_fn_(rmd_text)
 n_char_tot_stri_r <-  rmd_stats$n_char_tot_stri
 n_char_tot_korp_r <- rmd_stats$n_char_tot_korp
 
-n_words_qdap_r <- rmd_stats$n_words_qdap
 n_words_stri_r <- rmd_stats$n_words_stri
 n_words_korp_r <- rmd_stats$n_words_korp
 
-n_sentences_qdap_r <- rmd_stats$n_sentences_qdap
 n_sentences_korp_r <- rmd_stats$n_sentences_korp
 
 test_that("Word count is correct for rmd text", {
   expect_equal(n_char_tot_stri_r, 111)
   expect_equal(n_char_tot_korp_r, 112)
-  expect_equal(n_words_qdap_r, 14)
   expect_equal(n_words_stri_r, 15)
   expect_equal(n_words_korp_r, 15)
-  expect_equal(n_sentences_qdap_r, 2)
   expect_equal(n_sentences_korp_r, 2)
 })

@@ -4,7 +4,7 @@
 #'
 #' @name wordcountaddin
 #' @docType package
-#' @import  qdap purrr stringi koRpus
+#' @import purrr stringi koRpus
 NULL
 
 
@@ -76,24 +76,6 @@ prep_text <- function(text){
 }
 
 
-prep_text_qdap <- function(text){
-
-  requireNamespace("qdap")
-  requireNamespace("purrr")
-  # prepare for qdap functions
-  q_text <-  replace_abbreviation(text)
-  df <-  data.frame(text_var = sent_detect(q_text))
-  # check_text(df)
-
-  sentSplit_safe <- safely(sentSplit)
-  df_ss <- sentSplit_safe(df, text.var = "text_var",
-                          endmarks = c("?", ".", "!","|", ":"))
-
-  word_stats_safe <- safely(word_stats)
-  df_ws <- word_stats_safe(df_ss$result, digit.remove = TRUE, apostrophe.remove	= TRUE)
-
-  return(list(df_ss = df_ss, df_ws = df_ws))
-}
 
 prep_text_korpus <- function(text){
   requireNamespace("purrr")
@@ -113,22 +95,8 @@ text_stats_fn_ <- function(text){
   text <- prep_text(text)
 
 
-requireNamespace("qdap")
   requireNamespace("stringi")
   requireNamespace("koRpus")
-
-  # qdap methods
-  qdap_output <-  prep_text_qdap(text)
-  df_ws <- qdap_output$df_ws$result
-  # df_ws$ts # word count, char count, syllable count per sentence
-  # df_ws$gts # totals
-  # basic stats on the text:
-  n_char_tot_qdap <- df_ws$gts$n.char
-  n_words_qdap <- df_ws$gts$n.words # -1
-  # n_sent <- df_ws$gts$n.sent
-  n_sent_qdap <- nrow(qdap_output$df_ss$result)
-  # wps <- df_ws$gts$wps
-  wps_qdap <- df_ws$gts$n.words / n_sent_qdap
 
   # stringi methods
   n_char_tot <- sum(stri_stats_latex(text)[c(1,3)])
@@ -148,24 +116,17 @@ requireNamespace("qdap")
   wpm <-  200
   reading_time_korp <- paste0(round(k_wc / wpm, 1), " minutes")
   reading_time_stri <- paste0(round(n_words_stri / wpm, 1), " minutes")
-  reading_time_qdap <- paste0(round(n_words_qdap / wpm, 1), " minutes")
-
 
   return(list(
   # make the names more useful
   n_char_tot_stri = n_char_tot,
   n_char_tot_korp = k_nchr,
-  n_char_tot_qdap = n_char_tot_qdap,
   n_words_korp = k_wc,
   n_words_stri = n_words_stri,
-  n_words_qdap = n_words_qdap,
-  n_sentences_qdap = n_sent_qdap,
   n_sentences_korp = k_sent,
-  words_per_sentence_qdap = wps_qdap,
   words_per_sentence_korp = k_wps,
   reading_time_korp = reading_time_korp,
   reading_time_stri = reading_time_stri,
-  reading_time_qdap = reading_time_qdap
   ))
 
   # resume warnings
@@ -181,7 +142,6 @@ text_stats_fn <- function(text){
   results_df <- data.frame(Method = c("Word count", "Character count", "Sentence count", "Reading time"),
                            koRpus  = c(l$n_words_korp, l$n_char_tot_korp, l$n_sentences_korp, l$reading_time_korp),
                            stringi = c(l$n_words_stri, l$n_char_tot_stri, "Not available", l$reading_time_stri),
-                           qdap =    c(l$n_words_qdap, l$n_char_tot_qdap, l$n_sentences_qdap, l$reading_time_qdap)
                            )
 
   results_df_tab <- knitr::kable(results_df)
