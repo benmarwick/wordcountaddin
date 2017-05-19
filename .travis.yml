@@ -4,4 +4,10 @@ language: r
 warnings_are_errors: false
 sudo: required
 
+r_github_packages:
+  - jimhester/covr
+
+after_success:
+  - Rscript -e 'covr::codecov()'
+
 
