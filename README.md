@@ -1,8 +1,8 @@
-[![Last-changedate](https://img.shields.io/badge/last%20change-2017--05--19-brightgreen.svg)](https://github.com/benmarwick/wordcountaddin/commits/master) [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.4.0-brightgreen.svg)](https://cran.r-project.org/) [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/) [![Travis-CI Build Status](https://travis-ci.org/benmarwick/wordcountaddin.png?branch=master)](https://travis-ci.org/benmarwick/wordcountaddin) [![codecov.io](https://codecov.io/github/benmarwick/wordcountaddin/coverage.svg?branch=master)](https://codecov.io/github/benmarwick/wordcountaddin?branch=master) [![ORCiD](https://img.shields.io/badge/ORCiD-0000--0001--7879--4531-green.svg)](http://orcid.org/0000-0001-7879-4531)
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-wordcountaddin
-==============
+wordcountaddin <img src="inst/logo.png" align="right" height="120" width="139" />
+=================================================================================
+
+[![Last-changedate](https://img.shields.io/badge/last%20change-2017--05--19-brightgreen.svg)](https://github.com/benmarwick/wordcountaddin/commits/master) [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.4.0-brightgreen.svg)](https://cran.r-project.org/) [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/) [![Travis-CI Build Status](https://travis-ci.org/benmarwick/wordcountaddin.png?branch=master)](https://travis-ci.org/benmarwick/wordcountaddin) [![codecov.io](https://codecov.io/github/benmarwick/wordcountaddin/coverage.svg?branch=master)](https://codecov.io/github/benmarwick/wordcountaddin?branch=master) [![ORCiD](https://img.shields.io/badge/ORCiD-0000--0001--7879--4531-green.svg)](http://orcid.org/0000-0001-7879-4531)
 
 This R package is an [RStudio addin](https://rstudio.github.io/rstudioaddins/) to count words and characters in text in an [R markdown](http://rmarkdown.rstudio.com/) document. It also has a function to compute readability statistics so you can get an indication of how easy or difficult your document is to read.
 
