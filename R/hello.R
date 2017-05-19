@@ -61,6 +61,9 @@ prep_text <- function(text){
   # don't include # for headings
   text <- gsub("#*", "", text)
 
+  # don't include html tagsdes
+  text <- gsub("<.+?>|</.+?>", "", text)
+
   # don't include LaTeX \eggs{ham}
   # how to do? problem with capturing \x
 

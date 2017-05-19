@@ -135,3 +135,32 @@ test_that("Word count is correct for rmd text", {
   expect_equal(n_words_korp_r, 15)
   expect_equal(n_sentences_korp_r, 2)
 })
+
+#  test for <br>
+
+string_with_br <- "Hi, I have <br> in the </br> string"
+
+string_with_br_stats <- wordcountaddin:::text_stats_fn_(string_with_br)
+
+n_char_tot_stri_r <-  string_with_br_stats$n_char_tot_stri
+n_char_tot_korp_r <- string_with_br_stats$n_char_tot_korp
+
+n_words_stri_r <- string_with_br_stats$n_words_stri
+n_words_korp_r <- string_with_br_stats$n_words_korp
+
+n_sentences_korp_r <- string_with_br_stats$n_sentences_korp
+
+
+test_that("we can ignore <br> and </br>", {
+  expect_equal(n_char_tot_stri_r, 26)
+  expect_equal(n_char_tot_korp_r, 27)
+  expect_equal(n_words_stri_r, 6)
+  expect_equal(n_words_korp_r, 6)
+  expect_equal(n_sentences_korp_r, 0)
+})
+
+
+
+
+
+

@@ -9,4 +9,3 @@ readability()
 \description{
 Call this addin to get readbility stats about the text
 }
-

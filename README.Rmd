@@ -27,6 +27,7 @@ When counting words in the text of your Rmd document, these things will be ignor
 - YAML front matter    
 - code chunks and inline code
 - text in HTML comment tags: `<!-- text -->` 
+- HTML tags in the text: `<br>`,  `</br>`
 - inline URLs in this format: `[text of link](url)`
 - images with captions in this format: `![this is the caption](/path/to/image.png)`
 - header level indicators such as `#` and `##`, etc.
@@ -35,7 +36,7 @@ And because my regex is quite simple, the word count function may also ignore pa
 
 The word count will include text in headers, block quotations, verbatim code blocks, tables, raw LaTeX and raw HTML. 
 
-In general, there are numerous ways to count words, with no widely accepted standard method. The variety of methods is due to differences in the definitions of a word and a sentence. 
+In general, there are numerous ways to count words, with no widely accepted standard method. The variety of methods is due to differences in the definitions of a word and a sentence. Run `?stringi::stri_stats_latex` and `?koRpus::describe` to learn more about the word counting methods.
 
 For this addin I've included two methods, mostly out of curiosity to see how they differ from each other. I use functions from the  [stringi](https://cran.r-project.org/web/packages/stringi/index.html) and [koRpus](https://cran.r-project.org/web/packages/koRpus/index.html) packages. If you're curious, you can compare the results you get with this addin to an online tool such as <http://wordcounttools.com/>.
 
@@ -112,9 +113,6 @@ Go to `Tools > Addins` in RStudio to select and configure addins.
 3. Go to `Tools > Addins` in RStudio and click on `Word count` or `Readability`. Computing `Readability` may take a few moments on longer documents because it has to count syllables for some of the stats.
 4. Look in the console for the output   
 
-Here's the obligatory demo gif:
-
-![demo gif](inst/wordcountaddin.gif)
 
 ## Feedback, contributing, etc.
 

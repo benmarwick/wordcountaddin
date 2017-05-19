@@ -9,4 +9,3 @@ text_stats()
 \description{
 Call this addin to get a word count and some other stats about the text
 }
-
