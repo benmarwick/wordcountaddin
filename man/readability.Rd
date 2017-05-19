@@ -4,7 +4,7 @@
 \alias{readability}
 \title{Get readability stats for selected text (excluding code chunks)}
 \usage{
-readability()
+readability(filename = "")
 }
 \description{
 Call this addin to get readbility stats about the text

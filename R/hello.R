@@ -7,17 +7,49 @@
 #' @import purrr stringi koRpus
 NULL
 
+#-------------------------------------------------------------------
+# fns for working with selected text in an active Rmd
 
 #' Get text stats for selected text (excluding code chunks and inline code)
 #'
 #' Call this addin to get a word count and some other stats about the text
 #'
 #' @export
-text_stats <- function() {
-  context <- rstudioapi::getActiveDocumentContext()
-  selection <- context$selection
-  text <- unlist(selection)["text"]
-  text_stats_fn(text)
+text_stats <- function(filename = "") {
+
+  text_to_count <-
+
+  if(nchar(filename) > 0){
+    # if a filename is supplied, check that it is a md or rmd file
+    if(!grepl(".rmd$|.Rmd$|.RMD$", filename)){
+           stop("The file supplied is not a .md or .Rmd file. This function only works with markdown or R markdown files.")
+    } else {
+      # if we have an md or Rmd file, read it in as a character vector
+      paste(scan(filename, 'character', quiet = TRUE), collapse = " ")
+    }
+
+    } else  {
+
+    # if we don'thave a filename, then work with current Rmd in RStudio
+    context <- rstudioapi::getActiveDocumentContext()
+
+    # get selection text and full text of Rmd
+    selection_text <- unname(unlist(context$selection)["text"])
+    entire_document_text <- paste(scan(context$path, 'character', quiet = TRUE), collapse = " ")
+
+    # if the selection has no characters (ie. there is no selection), then count the words in the full text of the Rmd
+      if(nchar(selection_text) > 0){
+        selection_text
+      } else  {
+        entire_document_text
+      }
+  }
+
+
+
+
+
+  text_stats_fn(text_to_count)
 }
 
 #' Get readability stats for selected text (excluding code chunks)
@@ -25,12 +57,75 @@ text_stats <- function() {
 #' Call this addin to get readbility stats about the text
 #'
 #' @export
-readability <- function() {
-  context <- rstudioapi::getActiveDocumentContext()
-  selection <- context$selection
-  text <- unlist(selection)["text"]
-  readability_fn(text)
+readability <- function(filename = "") {
+
+  text_to_count <-
+
+    if(nchar(filename) > 0){
+      # if a filename is supplied, check that it is a md or rmd file
+      if(!grepl(".rmd$|.Rmd$|.RMD$", filename)){
+        stop("The file supplied is not a .md or .Rmd file. This function only works with markdown or R markdown files.")
+      } else {
+        # if we have an md or Rmd file, read it in as a character vector
+        paste(scan(filename, 'character', quiet = TRUE), collapse = " ")
+      }
+
+    } else  {
+
+      # if we don'thave a filename, then work with current Rmd in RStudio
+      context <- rstudioapi::getActiveDocumentContext()
+
+      # get selection text and full text of Rmd
+      selection_text <- unname(unlist(context$selection)["text"])
+      entire_document_text <- paste(scan(context$path, 'character', quiet = TRUE), collapse = " ")
+
+      # if the selection has no characters (ie. there is no selection), then count the words in the full text of the Rmd
+      if(nchar(selection_text) > 0){
+        selection_text
+      } else  {
+        entire_document_text
+      }
+    }
+
+
+
+  readability_fn(text_to_count)
 }
+
+#---------------------------------------------------------------
+# directly work on a character string in the console
+
+
+#' Get text stats for selected text (excluding code chunks and inline code)
+#'
+#' Use this function with a character string as input
+#'
+#' @export
+text_stats_chr <- function(text) {
+
+  text <- paste(text, collapse="\n")
+
+  text_stats_fn(text)
+
+}
+
+
+#' Get readability stats for selected text (excluding code chunks)
+#'
+#' Use this function with a character string as input
+#'
+#' @param text a character string of text, length of one
+#'
+#' @export
+readability_chr <- function(text) {
+
+  text <- paste(text, collapse = "\n")
+
+  readability_fn(text)
+
+}
+#-----------------------------------------------------------
+# helper fns
 
 prep_text <- function(text){
 
@@ -61,7 +156,7 @@ prep_text <- function(text){
   # don't include # for headings
   text <- gsub("#*", "", text)
 
-  # don't include html tagsdes
+  # don't include html tags
   text <- gsub("<.+?>|</.+?>", "", text)
 
   # don't include LaTeX \eggs{ham}
@@ -77,8 +172,6 @@ prep_text <- function(text){
   }
 
 }
-
-
 
 prep_text_korpus <- function(text){
   requireNamespace("purrr")

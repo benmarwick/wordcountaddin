@@ -22,7 +22,15 @@ knitr::opts_chunk$set(
 
 # wordcountaddin
 
-This R package is an [RStudio addin](https://rstudio.github.io/rstudioaddins/) to count words and characters in selected text in an [R markdown](http://rmarkdown.rstudio.com/) document. It also has a function to compute readability statistics. 
+This R package is an [RStudio addin](https://rstudio.github.io/rstudioaddins/) to count words and characters in text in an [R markdown](http://rmarkdown.rstudio.com/) document. It also has a function to compute readability statistics so you can get an indication of how easy or difficult your document is to read. 
+
+You can count words in your Rmd file in three ways:
+
+- In a selection of text in your active Rmd, by selecting some text with your mouse in in RStudio and using the Word count Addin   
+- All the words in your active Rmd in RStudio, by using the Word count Addin  with no text selected
+- All the words in an Rmd file, directly using the `word_count` function from the console or command line (RStudio not required), and specifiying the filename as an argument to the function (e.g. `wordcountaddin::text_stats("my_file.Rmd")`)
+
+Independent of an Rmd file, you can also count words in a character vector from the console using the `text_stats_chr` function (and there is `readability_chr` for readability). 
 
 ## Word count
 

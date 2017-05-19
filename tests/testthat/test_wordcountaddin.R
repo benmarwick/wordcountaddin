@@ -160,7 +160,41 @@ test_that("we can ignore <br> and </br>", {
 })
 
 
+# test that we can word count on a file
+the_rmd_file_stats <- wordcountaddin::text_stats(filename = "test_wordcountaddin.Rmd")
+
+test_that("Word count is correct for rmd file", {
+  expect_equal(the_rmd_file_stats[3],
+               "|Word count      |101         |100           |")
+  expect_equal(the_rmd_file_stats[4],
+               "|Character count |565         |564           |")
+  expect_equal(the_rmd_file_stats[5],
+               "|Sentence count  |7           |Not available |")
+  expect_equal(the_rmd_file_stats[6],
+               "|Reading time    |0.5 minutes |0.5 minutes   |")
+})
 
 
+# command line fns
+text_on_the_command_line <- "here is some text"
+
+text_stats_chr_out <- text_stats_chr(text_on_the_command_line)
+
+test_that("Word count is correct for cmd line", {
+  expect_equal(text_stats_chr_out[3],
+               "|Word count      |4         |4             |")
+  expect_equal(text_stats_chr_out[4],
+               "|Character count |18        |17            |")
+  expect_equal(text_stats_chr_out[5],
+               "|Sentence count  |0         |Not available |")
+  expect_equal(text_stats_chr_out[6],
+               "|Reading time    |0 minutes |0 minutes     |")
+})
 
 
+readability_chr_out <- readability_chr(text_on_the_command_line)
+
+test_that("readability is correct for cmd line", {
+  expect_length(readability_chr_out,
+               26)
+})
