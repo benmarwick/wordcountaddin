@@ -7,6 +7,9 @@ Authors@R: c(person("Ben", "Marwick",
                   role = c("aut", "cre")),
             person("JooYoung", "Seo", 
                   email = "sjysky@gmail.com", 
+                  role = "ctb"),
+            person("Henrik", "Bengtsson", 
+                  email = "henrik.bengtsson@gmail.com", 
                   role = "ctb"))
 Maintainer: Ben Marwick <benmarwick@gmail.com>
 Description: This packages is an addin for RStudio that will count the words
