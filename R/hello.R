@@ -21,7 +21,7 @@ text_stats <- function(filename = "") {
 
   if(nchar(filename) > 0){
     # if a filename is supplied, check that it is a md or rmd file
-    if(!grepl(".rmd$|.Rmd$|.RMD$", filename)){
+    if(!grepl(".md$|.rmd$|.Rmd$|.RMD$", filename)){
            stop("The file supplied is not a .md or .Rmd file. This function only works with markdown or R markdown files.")
     } else {
       # if we have an md or Rmd file, read it in as a character vector
@@ -63,7 +63,7 @@ readability <- function(filename = "") {
 
     if(nchar(filename) > 0){
       # if a filename is supplied, check that it is a md or rmd file
-      if(!grepl(".rmd$|.Rmd$|.RMD$", filename)){
+      if(!grepl(".md$|.rmd$|.Rmd$|.RMD$", filename)){
         stop("The file supplied is not a .md or .Rmd file. This function only works with markdown or R markdown files.")
       } else {
         # if we have an md or Rmd file, read it in as a character vector
