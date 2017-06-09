@@ -17,12 +17,27 @@ NULL
 #' @export
 text_stats <- function(filename = "") {
 
+  md_file_ext_regex <- paste(
+    "\\.markdown$",
+    "\\.mdown$",
+    "\\.mkdn$",
+    "\\.md$",
+    "\\.mkd$",
+    "\\.mdwn$",
+    "\\.mdtxt$",
+    "\\.mdtext$",
+    "\\.rmd$",
+    "\\.Rmd$",
+    "\\.RMD$",
+  sep = "|")
+
   text_to_count <-
 
   if(nchar(filename) > 0){
     # if a filename is supplied, check that it is a md or rmd file
-    if(!grepl(".rmd$|.Rmd$|.RMD$", filename)){
-           stop("The file supplied is not a .md or .Rmd file. This function only works with markdown or R markdown files.")
+    if(!grepl(md_file_ext_regex, filename)){
+           stop(paste("The supplied file has a file extension which is not associated with markdown.",
+                      "This function only works with markdown or R markdown files.", sep = "\n  "))
     } else {
       # if we have an md or Rmd file, read it in as a character vector
       paste(scan(filename, 'character', quiet = TRUE), collapse = " ")
@@ -59,12 +74,27 @@ text_stats <- function(filename = "") {
 #' @export
 readability <- function(filename = "") {
 
+  md_file_ext_regex <- paste(
+    "\\.markdown$",
+    "\\.mdown$",
+    "\\.mkdn$",
+    "\\.md$",
+    "\\.mkd$",
+    "\\.mdwn$",
+    "\\.mdtxt$",
+    "\\.mdtext$",
+    "\\.rmd$",
+    "\\.Rmd$",
+    "\\.RMD$",
+    sep = "|")
+
   text_to_count <-
 
     if(nchar(filename) > 0){
       # if a filename is supplied, check that it is a md or rmd file
-      if(!grepl(".rmd$|.Rmd$|.RMD$", filename)){
-        stop("The file supplied is not a .md or .Rmd file. This function only works with markdown or R markdown files.")
+      if(!grepl(md_file_ext_regex, filename)){
+        stop(paste("The supplied file has a file extension which is not associated with markdown.",
+                   "This function only works with markdown or R markdown files.", sep = "\n  "))
       } else {
         # if we have an md or Rmd file, read it in as a character vector
         paste(scan(filename, 'character', quiet = TRUE), collapse = " ")
