@@ -198,3 +198,14 @@ test_that("readability is correct for cmd line", {
   expect_length(readability_chr_out,
                26)
 })
+
+# test for escaping the percent sign in plain text
+
+text_with_percent_sign <- "Here is some % text with percent % signs in it."
+
+text_stats_percent_chr_out <- text_stats_chr(text_with_percent_sign)
+
+test_that("Word count is correct for text with % sign", {
+  expect_equal(text_stats_percent_chr_out[3],
+               "|Word count      |9         |9             |")
+})
