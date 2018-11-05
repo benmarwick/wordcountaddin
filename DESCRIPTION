@@ -26,8 +26,11 @@ Imports:
     koRpus,
     shiny (>= 0.13),
     miniUI (>= 0.1.1),
-    rstudioapi (>= 0.5)
-RoxygenNote: 6.0.1
+    rstudioapi (>= 0.5),
+    koRpus.lang.en,
+    sylly,
+    sylly.en
+RoxygenNote: 6.1.0
 Suggests:
     testthat,
     covr

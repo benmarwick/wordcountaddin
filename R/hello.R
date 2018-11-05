@@ -208,6 +208,7 @@ prep_text <- function(text){
 
 prep_text_korpus <- function(text){
   requireNamespace("purrr")
+  requireNamespace("koRpus.lang.en")
   tokenize_safe <- safely(tokenize)
   k1 <- tokenize_safe(text, lang = 'en', format = 'obj')
   k1 <- k1$result
@@ -226,6 +227,8 @@ text_stats_fn_ <- function(text){
 
   requireNamespace("stringi")
   requireNamespace("koRpus")
+  requireNamespace("koRpus.lang.en")
+  requireNamespace("sylly")
 
   # stringi methods
   n_char_tot <- sum(stri_stats_latex(text)[c(1,3)])
@@ -233,7 +236,7 @@ text_stats_fn_ <- function(text){
 
   #korpus methods
   k1 <- prep_text_korpus(text)
-  korpus_stats <- describe(k1)
+  korpus_stats <- sylly::describe(k1)
   k_nchr <- korpus_stats$all.chars
   k_wc <- korpus_stats$words
   k_sent <- korpus_stats$sentences
