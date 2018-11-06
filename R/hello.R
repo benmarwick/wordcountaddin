@@ -207,9 +207,8 @@ prep_text <- function(text){
 }
 
 prep_text_korpus <- function(text){
-  requireNamespace("purrr")
   requireNamespace("koRpus.lang.en")
-  tokenize_safe <- safely(tokenize)
+  tokenize_safe <- purrr::safely(koRpus::tokenize)
   k1 <- tokenize_safe(text, lang = 'en', format = 'obj')
   k1 <- k1$result
   return(k1)
@@ -227,7 +226,7 @@ text_stats_fn_ <- function(text){
 
   requireNamespace("stringi")
   requireNamespace("koRpus")
-  requireNamespace("koRpus.lang.en")
+  require("koRpus.lang.en")
   requireNamespace("sylly")
 
   # stringi methods
