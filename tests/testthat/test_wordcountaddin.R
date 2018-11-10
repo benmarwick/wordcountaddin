@@ -2,12 +2,6 @@ library(wordcountaddin)
 
 context("Word count")
 
-r = getOption("repos")
-r["CRAN"] = "http://cran.us.r-project.org"
-options(repos = r)
-
-koRpus::install.koRpus.lang("en")
-
 # short sentence
 eleven_words <- "here are exactly eleven words of fairly boring and unpunctuated text"
 
