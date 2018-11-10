@@ -223,7 +223,7 @@ text_stats_fn_ <- function(text){
   text <- prep_text(text)
 
 
-  require("koRpus.lang.en")
+  require("koRpus.lang.en", quietly = TRUE)
 
   # stringi methods
   n_char_tot <- sum(stri_stats_latex(text)[c(1,3)])
