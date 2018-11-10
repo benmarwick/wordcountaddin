@@ -195,9 +195,12 @@ test_that("Word count is correct for cmd line", {
 
 test_that("readability is correct for cmd line", {
   text_on_the_command_line <- "here is some text"
-  readability_chr_out <- readability_chr(text_on_the_command_line)
-  expect_length(readability_chr_out,
-               26)
+  expect_output(
+    expect_warning(
+      readability_chr_out <- readability_chr(text_on_the_command_line)
+    )
+  )
+  expect_length(readability_chr_out, 26)
 })
 
 test_that("Word count is correct for text with % sign", {
