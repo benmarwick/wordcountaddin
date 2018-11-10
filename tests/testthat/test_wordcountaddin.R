@@ -164,7 +164,7 @@ test_that("we can ignore <br> and </br>", {
 
 test_that("Word count is correct for rmd file", {
   # test that we can word count on a file
-  the_rmd_file_stats <- text_stats(filename = "test_wordcountaddin.Rmd")
+  the_rmd_file_stats <- text_stats(filename = test_path("test_wordcountaddin.Rmd"))
 
   expect_equal(the_rmd_file_stats[3],
                "|Word count      |101         |100           |")
