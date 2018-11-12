@@ -207,7 +207,6 @@ prep_text <- function(text){
 }
 
 prep_text_korpus <- function(text){
-  requireNamespace("koRpus.lang.en")
   tokenize_safe <- purrr::safely(koRpus::tokenize)
   k1 <- tokenize_safe(text, lang = 'en', format = 'obj')
   k1 <- k1$result
@@ -224,10 +223,7 @@ text_stats_fn_ <- function(text){
   text <- prep_text(text)
 
 
-  requireNamespace("stringi")
-  requireNamespace("koRpus")
-  require("koRpus.lang.en")
-  requireNamespace("sylly")
+  require("koRpus.lang.en", quietly = TRUE)
 
   # stringi methods
   n_char_tot <- sum(stri_stats_latex(text)[c(1,3)])
@@ -287,8 +283,6 @@ readability_fn_ <- function(text){
 
   oldw <- getOption("warn")
   options(warn = -1)
-
- requireNamespace("koRpus")
 
   # korpus methods
   k1 <- prep_text_korpus(text)
