@@ -2,9 +2,9 @@
 wordcountaddin <img src="inst/logo.png" align="right" height="130" />
 =====================================================================
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2018--11--21-brightgreen.svg)](https://github.com/benmarwick/wordcountaddin/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2019--01--09-brightgreen.svg)](https://github.com/benmarwick/wordcountaddin/commits/master)
 [![minimal R
-version](https://img.shields.io/badge/R%3E%3D-3.5.1-brightgreen.svg)](https://cran.r-project.org/)
+version](https://img.shields.io/badge/R%3E%3D-3.5.2-brightgreen.svg)](https://cran.r-project.org/)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 [![Travis-CI Build
 Status](https://travis-ci.org/benmarwick/wordcountaddin.png?branch=master)](https://travis-ci.org/benmarwick/wordcountaddin)
@@ -21,13 +21,15 @@ read.
 You can count words in your Rmd file in three ways:
 
 -   In a selection of text in your active Rmd, by selecting some text
-    with your mouse in RStudio and using the Word count Addin  
--   All the words in your active Rmd in RStudio, by using the Word count
+    with your mouse in RStudio and using the Wordcount Addin  
+-   All the words in your active Rmd in RStudio, by using the Wordcount
     Addin with no text selected
 -   All the words in an Rmd file, directly using the `word_count`
     function from the console or command line (RStudio not required),
     and specifiying the filename as an argument to the function (e.g.
-    `wordcountaddin::text_stats("my_file.Rmd")`)
+    `wordcountaddin::word_count("my_file.Rmd")`). This will give you a
+    single integer result, rather than the Markdown table that the other
+    functions return.
 
 Independent of an Rmd file, you can also count words in a character
 vector from the console using the `text_stats_chr` function (and there
@@ -65,7 +67,8 @@ how they differ from each other. I use functions from the
 [stringi](https://cran.r-project.org/web/packages/stringi/index.html)
 and [koRpus](https://cran.r-project.org/web/packages/koRpus/index.html)
 packages. If you’re curious, you can compare the results you get with
-this addin to an online tool such as <http://wordcounttools.com/>.
+this addin to an online tool such as
+<a href="http://wordcounttools.com/" class="uri">http://wordcounttools.com/</a>.
 
 The output of the `Word count` function is a markdown table in your R
 console that might look like this:
