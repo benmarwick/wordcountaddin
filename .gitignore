@@ -1,3 +1,6 @@
 .Rproj.user
 .Rhistory
 .RData
+wordcountaddin.Rcheck/
+wordcountaddin*.tar.gz
+wordcountaddin*.tgz

@@ -7,17 +7,9 @@
 #' @import purrr stringi koRpus
 NULL
 
-#-------------------------------------------------------------------
-# fns for working with selected text in an active Rmd
+# global things
 
-#' Get text stats for selected text (excluding code chunks and inline code)
-#'
-#' Call this addin to get a word count and some other stats about the text
-#'
-#' @export
-text_stats <- function(filename = "") {
-
-  md_file_ext_regex <- paste(
+ md_file_ext_regex <- paste(
     "\\.markdown$",
     "\\.mdown$",
     "\\.mkdn$",
@@ -31,41 +23,42 @@ text_stats <- function(filename = "") {
     "\\.RMD$",
   sep = "|")
 
-  text_to_count <-
 
-  if(nchar(filename) > 0){
-    # if a filename is supplied, check that it is a md or rmd file
-    if(!grepl(md_file_ext_regex, filename)){
-           stop(paste("The supplied file has a file extension which is not associated with markdown.",
-                      "This function only works with markdown or R markdown files.", sep = "\n  "))
-    } else {
-      # if we have an md or Rmd file, read it in as a character vector
-      paste(scan(filename, 'character', quiet = TRUE), collapse = " ")
-    }
+#-------------------------------------------------------------------
+# fns for working with selected text in an active Rmd
 
-    } else  {
+#' Get text stats for selected text (excluding code chunks and inline code)
+#'
+#' Call this addin to get a word count and some other stats about the text
+#'
+#' @export
+text_stats <- function(filename = "") {
 
-    # if we don'thave a filename, then work with current Rmd in RStudio
-    context <- rstudioapi::getActiveDocumentContext()
+  text_to_count_output <- text_to_count(filename)
 
-    # get selection text and full text of Rmd
-    selection_text <- unname(unlist(context$selection)["text"])
-    entire_document_text <- paste(scan(context$path, 'character', quiet = TRUE), collapse = " ")
-
-    # if the selection has no characters (ie. there is no selection), then count the words in the full text of the Rmd
-      if(nchar(selection_text) > 0){
-        selection_text
-      } else  {
-        entire_document_text
-      }
-  }
-
-
-
-
-
-  text_stats_fn(text_to_count)
+  text_stats_fn(text_to_count_output)
 }
+
+
+#' Get a word count as a single integer
+#'
+#' @example
+#' # word_count("README.Rmd")
+#'
+#' @export
+word_count <- function(filename = ""){
+
+  text_to_count_output <- text_to_count(filename)
+
+  word_count_output <- text_stats_fn_(text_to_count_output)
+
+  word_count_output$n_words_korp
+}
+
+
+
+
+
 
 #' Get readability stats for selected text (excluding code chunks)
 #'
@@ -74,52 +67,10 @@ text_stats <- function(filename = "") {
 #' @export
 readability <- function(filename = "") {
 
-  md_file_ext_regex <- paste(
-    "\\.markdown$",
-    "\\.mdown$",
-    "\\.mkdn$",
-    "\\.md$",
-    "\\.mkd$",
-    "\\.mdwn$",
-    "\\.mdtxt$",
-    "\\.mdtext$",
-    "\\.rmd$",
-    "\\.Rmd$",
-    "\\.RMD$",
-    sep = "|")
 
-  text_to_count <-
+  text_to_count_output <- text_to_count(filename)
 
-    if(nchar(filename) > 0){
-      # if a filename is supplied, check that it is a md or rmd file
-      if(!grepl(md_file_ext_regex, filename)){
-        stop(paste("The supplied file has a file extension which is not associated with markdown.",
-                   "This function only works with markdown or R markdown files.", sep = "\n  "))
-      } else {
-        # if we have an md or Rmd file, read it in as a character vector
-        paste(scan(filename, 'character', quiet = TRUE), collapse = " ")
-      }
-
-    } else  {
-
-      # if we don'thave a filename, then work with current Rmd in RStudio
-      context <- rstudioapi::getActiveDocumentContext()
-
-      # get selection text and full text of Rmd
-      selection_text <- unname(unlist(context$selection)["text"])
-      entire_document_text <- paste(scan(context$path, 'character', quiet = TRUE), collapse = " ")
-
-      # if the selection has no characters (ie. there is no selection), then count the words in the full text of the Rmd
-      if(nchar(selection_text) > 0){
-        selection_text
-      } else  {
-        entire_document_text
-      }
-    }
-
-
-
-  readability_fn(text_to_count)
+  readability_fn(text_to_count_output)
 }
 
 #---------------------------------------------------------------
@@ -155,7 +106,37 @@ readability_chr <- function(text) {
 
 }
 #-----------------------------------------------------------
-# helper fns
+# helper fns, not exported
+
+text_to_count <- function(filename){
+
+    if(nchar(filename) > 0){
+      # if a filename is supplied, check that it is a md or rmd file
+      if(!grepl(md_file_ext_regex, filename)){
+        stop(paste("The supplied file has a file extension which is not associated with markdown.",
+                   "This function only works with markdown or R markdown files.", sep = "\n  "))
+      } else {
+        # if we have an md or Rmd file, read it in as a character vector
+        paste(scan(filename, 'character', quiet = TRUE), collapse = " ")
+      }
+
+    } else  {
+
+      # if we don'thave a filename, then work with current Rmd in RStudio
+      context <- rstudioapi::getActiveDocumentContext()
+
+      # get selection text and full text of Rmd
+      selection_text <- unname(unlist(context$selection)["text"])
+      entire_document_text <- paste(scan(context$path, 'character', quiet = TRUE), collapse = " ")
+
+      # if the selection has no characters (ie. there is no selection), then count the words in the full text of the Rmd
+      if(nchar(selection_text) > 0){
+        selection_text
+      } else  {
+        entire_document_text
+      }
+    }
+}
 
 prep_text <- function(text){
 
@@ -215,13 +196,15 @@ prep_text_korpus <- function(text){
 
 
 # These functions do the actual work
+
+
+#' @export
 text_stats_fn_ <- function(text){
   # suppress warnings
   oldw <- getOption("warn")
   options(warn = -1)
 
   text <- prep_text(text)
-
 
   require("koRpus.lang.en", quietly = TRUE)
 
@@ -260,6 +243,7 @@ text_stats_fn_ <- function(text){
   options(warn = oldw)
 
 }
+
 
 
 text_stats_fn <- function(text){

@@ -6,3 +6,6 @@
 ^CONDUCT\.md$
 ^CONTRIBUTING.md$
 ^codecov\.yml$
+^wordcountaddin\.Rcheck$
+^wordcountaddin.*\.tar\.gz$
+^wordcountaddin.*\.tgz$
