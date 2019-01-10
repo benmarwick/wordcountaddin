@@ -1,7 +1,7 @@
 Package: wordcountaddin
 Type: Package
 Title: Word counts and readability statistics in R markdown documents
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: c(person("Ben", "Marwick", 
                   email = "benmarwick@gmail.com",
                   role = c("aut", "cre")),

@@ -1,3 +1,14 @@
+# wordcountaddin 0.3.0
+
+NEW FEATURES
+
+* Count words from Rmd filename and get scalar as output (#20)
+
+MINOR IMPROVEMENTS
+
+* make the functions more DRY by adding some unexported fns
+* Expanded readme slightly
+* Added more tests
 
 # wordcountaddin 0.2.0
 
