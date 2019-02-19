@@ -2,10 +2,55 @@
 % Please edit documentation in R/hello.R
 \name{text_stats}
 \alias{text_stats}
+\alias{word_count}
+\alias{readability}
+\alias{text_stats_chr}
+\alias{readability_chr}
+\alias{text_stats_fn_}
 \title{Get text stats for selected text (excluding code chunks and inline code)}
 \usage{
-text_stats(filename = "")
+text_stats(filename = this_filename())
+
+word_count(filename = this_filename())
+
+readability(filename = this_filename())
+
+text_stats_chr(text)
+
+readability_chr(text)
+
+text_stats_fn_(text)
+}
+\arguments{
+\item{filename}{Path to the file on which to compute text stats.
+Default is the current file (when working in RStudio) or the file being
+knit (when compiling with \code{knitr}).}
+
+\item{text}{a character string of text, length of one}
 }
 \description{
 Call this addin to get a word count and some other stats about the text
+
+Get a word count as a single integer
+
+Get readability stats for selected text (excluding code chunks)
+
+Get text stats for selected text (excluding code chunks and inline code)
+
+Get readability stats for selected text (excluding code chunks)
+}
+\details{
+Call this addin to get readbility stats about the text
+
+Use this function with a character string as input
+
+Use this function with a character string as input
+}
+\examples{
+md <- system.file(package = "wordcountaddin", "NEWS.md")
+text_stats(md)
+word_count(md)
+\dontrun{
+readability(md)
+}
 }

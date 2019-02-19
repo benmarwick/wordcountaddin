@@ -1,7 +1,7 @@
 Package: wordcountaddin
 Type: Package
 Title: Word counts and readability statistics in R markdown documents
-Version: 0.3.0
+Version: 0.3.0.9000
 Authors@R: c(person("Ben", "Marwick", 
                   email = "benmarwick@gmail.com",
                   role = c("aut", "cre")),
@@ -20,6 +20,7 @@ Description: An addin for RStudio that will count the words and characters
 License: MIT + file LICENSE
 LazyData: TRUE
 Imports:
+    fs,
     knitr,
     koRpus,
     koRpus.lang.en,
