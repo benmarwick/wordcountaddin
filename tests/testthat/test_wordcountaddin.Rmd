@@ -31,3 +31,8 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 # context <- rstudioapi::getActiveDocumentContext()
 ```
 
+This Markdown file contains `r wordcountaddin::word_count()` words:
+
+```{r, message=FALSE, echo=FALSE, error=TRUE}
+wordcountaddin::text_stats()
+```

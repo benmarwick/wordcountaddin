@@ -169,7 +169,7 @@ test_that("Word count is correct for rmd file", {
   expect_equal(the_rmd_file_stats[3],
                "|Word count      |101         |100           |")
   expect_equal(the_rmd_file_stats[4],
-               "|Character count |565         |564           |")
+               "|Character count |566         |565           |")
   expect_equal(the_rmd_file_stats[5],
                "|Sentence count  |7           |Not available |")
   expect_equal(the_rmd_file_stats[6],

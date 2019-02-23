@@ -30,9 +30,19 @@ NULL
 #' Get text stats for selected text (excluding code chunks and inline code)
 #'
 #' Call this addin to get a word count and some other stats about the text
+#' @param filename Path to the file on which to compute text stats.
+#' Default is the current file (when working in RStudio) or the file being
+#' knit (when compiling with \code{knitr}).
 #'
 #' @export
-text_stats <- function(filename = "") {
+#' @examples
+#' md <- system.file(package = "wordcountaddin", "NEWS.md")
+#' text_stats(md)
+#' word_count(md)
+#' \dontrun{
+#' readability(md)
+#' }
+text_stats <- function(filename = this_filename()) {
 
   text_to_count_output <- text_to_count(filename)
 
@@ -40,13 +50,10 @@ text_stats <- function(filename = "") {
 }
 
 
-#' Get a word count as a single integer
-#'
-#' @example
-#' # word_count("README.Rmd")
-#'
+#' @rdname text_stats
+#' @description Get a word count as a single integer
 #' @export
-word_count <- function(filename = ""){
+word_count <- function(filename = this_filename()){
 
   text_to_count_output <- text_to_count(filename)
 
@@ -60,12 +67,13 @@ word_count <- function(filename = ""){
 
 
 
-#' Get readability stats for selected text (excluding code chunks)
+#' @rdname text_stats
+#' @description Get readability stats for selected text (excluding code chunks)
 #'
-#' Call this addin to get readbility stats about the text
+#' @details Call this addin to get readbility stats about the text
 #'
 #' @export
-readability <- function(filename = "") {
+readability <- function(filename = this_filename()) {
 
 
   text_to_count_output <- text_to_count(filename)
@@ -77,9 +85,10 @@ readability <- function(filename = "") {
 # directly work on a character string in the console
 
 
-#' Get text stats for selected text (excluding code chunks and inline code)
+#' @rdname text_stats
+#' @description Get text stats for selected text (excluding code chunks and inline code)
 #'
-#' Use this function with a character string as input
+#' @details Use this function with a character string as input
 #'
 #' @export
 text_stats_chr <- function(text) {
@@ -91,9 +100,10 @@ text_stats_chr <- function(text) {
 }
 
 
-#' Get readability stats for selected text (excluding code chunks)
+#' @rdname text_stats
+#' @description Get readability stats for selected text (excluding code chunks)
 #'
-#' Use this function with a character string as input
+#' @details Use this function with a character string as input
 #'
 #' @param text a character string of text, length of one
 #'
@@ -197,7 +207,7 @@ prep_text_korpus <- function(text){
 
 # These functions do the actual work
 
-
+#' @rdname text_stats
 #' @export
 text_stats_fn_ <- function(text){
   # suppress warnings
