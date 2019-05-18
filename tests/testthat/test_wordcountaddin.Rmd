@@ -1,6 +1,8 @@
 ---
 title: "rmd_test_file.rmd"
-output: html_document
+output:
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -15,6 +17,8 @@ When you click the **Knit** button a document will be generated that includes bo
 
 ```{r cars}
 summary(cars)
+
+# Lines line this have caused problems -----------------------------------------
 ```
 
 ## Including Plots

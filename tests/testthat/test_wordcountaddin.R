@@ -36,7 +36,7 @@ test_that("Word count is correct for moderately complex sentences", {
 
   expect_equal(n_char_tot_stri_mc, 406)
   expect_equal(n_char_tot_korp_mc, 407)
-  expect_equal(n_words_stri_mc, 80)
+  expect_equal(n_words_stri_mc, 80)  # MS Word says 79
   expect_equal(n_words_korp_mc, 80)
   expect_equal(n_sentences_korp_mc, 10)
 })
@@ -78,7 +78,7 @@ Tota veritus similique ne per, eam fastidii voluptatum eu. Sea tale mandamus sus
   expect_equal(n_char_tot_stri_f, 2896)
   expect_equal(n_char_tot_korp_f, 2897)
   expect_equal(n_words_stri_f, 450)
-  expect_equal(n_words_korp_f, 450)
+  expect_equal(n_words_korp_f, 450) # MS Word says 442
   expect_equal(n_sentences_korp_f, 52)
 })
 
@@ -105,6 +105,7 @@ This is an [R markdown](http://rmarkdown.rstudio.com/) document.
 
 ```{r cars}
 summary(cars)
+# Lines line this have caused problems -----------------------------------------
 ```
 
 `r 2+2`
@@ -133,11 +134,11 @@ plot(pressure)
 
   n_sentences_korp_r <- rmd_stats$n_sentences_korp
 
-  expect_equal(n_char_tot_stri_r, 111)
-  expect_equal(n_char_tot_korp_r, 112)
-  expect_equal(n_words_stri_r, 15)
-  expect_equal(n_words_korp_r, 15)
-  expect_equal(n_sentences_korp_r, 2)
+  expect_equal(n_char_tot_stri_r, 159)
+  expect_equal(n_char_tot_korp_r, 160)
+  expect_equal(n_words_stri_r, 20)
+  expect_equal(n_words_korp_r, 20)
+  expect_equal(n_sentences_korp_r, 4)
 })
 
 test_that("we can ignore <br> and </br>", {
@@ -167,13 +168,13 @@ test_that("Word count is correct for rmd file", {
   the_rmd_file_stats <- text_stats(filename = test_path("test_wordcountaddin.Rmd"))
 
   expect_equal(the_rmd_file_stats[3],
-               "|Word count      |106         |105           |")
+               "|Word count      |118         |117           |")
   expect_equal(the_rmd_file_stats[4],
-               "|Character count |602         |601           |")
+               "|Character count |689         |688           |")
   expect_equal(the_rmd_file_stats[5],
-               "|Sentence count  |8           |Not available |")
+               "|Sentence count  |13          |Not available |")
   expect_equal(the_rmd_file_stats[6],
-               "|Reading time    |0.5 minutes |0.5 minutes   |")
+               "|Reading time    |0.6 minutes |0.6 minutes   |")
 })
 
 
@@ -217,5 +218,7 @@ test_that("Word count is a single integer for a Rmd file when using word_count",
   the_rmd_word_count <- word_count(filename = test_path("test_wordcountaddin.Rmd"))
 
   expect_equal(the_rmd_word_count,
-               106L)
+               118L)
 })
+
+
