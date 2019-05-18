@@ -73,12 +73,12 @@ word_count <- function(filename = this_filename()){
 #' @details Call this addin to get readbility stats about the text
 #'
 #' @export
-readability <- function(filename = this_filename()) {
+readability <- function(filename = this_filename(), quiet = TRUE) {
 
 
   text_to_count_output <- text_to_count(filename)
 
-  readability_fn(text_to_count_output)
+  readability_fn(text_to_count_output, quiet = TRUE)
 }
 
 #---------------------------------------------------------------
@@ -108,11 +108,11 @@ text_stats_chr <- function(text) {
 #' @param text a character string of text, length of one
 #'
 #' @export
-readability_chr <- function(text) {
+readability_chr <- function(text, quiet = TRUE) {
 
   text <- paste(text, collapse = "\n")
 
-  readability_fn(text)
+  readability_fn(text, quiet = TRUE)
 
 }
 #-----------------------------------------------------------
@@ -198,8 +198,10 @@ prep_text <- function(text){
 }
 
 prep_text_korpus <- function(text){
+  lengths <- unlist(strsplit(text, " "))
+  no_long_one <- paste0(ifelse(nchar(lengths) > 30, substr(lengths, 1, 10), lengths), collapse = " ")
   tokenize_safe <- purrr::safely(koRpus::tokenize)
-  k1 <- tokenize_safe(text, lang = 'en', format = 'obj')
+  k1 <- tokenize_safe(no_long_one, lang = 'en', format = 'obj')
   k1 <- k1$result
   return(k1)
 }
@@ -271,7 +273,7 @@ text_stats_fn <- function(text){
 }
 
 
-readability_fn_ <- function(text){
+readability_fn_ <- function(text, quiet = TRUE){
 
   text <- prep_text(text)
 
@@ -280,7 +282,7 @@ readability_fn_ <- function(text){
 
   # korpus methods
   k1 <- prep_text_korpus(text)
-  k_readability <- koRpus::readability(k1)
+  k_readability <- koRpus::readability(k1, quiet = TRUE)
 
 
   return(k_readability)
@@ -290,9 +292,9 @@ readability_fn_ <- function(text){
 }
 
 
-readability_fn <- function(text){
+readability_fn <- function(text, quiet = TRUE){
   # a more condensed overview of the results
-  k_readability <- readability_fn_(text)
+  k_readability <- readability_fn_(text, quiet = TRUE)
   readability_summary_table <- knitr::kable(summary(k_readability))
   return(readability_summary_table)
 
