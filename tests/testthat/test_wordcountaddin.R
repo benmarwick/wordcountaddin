@@ -213,6 +213,17 @@ test_that("Word count is correct for text with % sign", {
                "|Word count      |9         |9             |")
 })
 
+
+test_that("Word count is correct for text with figures included using LaTeX code", {
+  # test for escaping the percent sign in plain text
+  text_with_figures <- "One \\begin{figure} \\caption{text} \\label{text} \\includegraphics[width=\\textwidth]{figure.png} \\end{figure} Two \\begin{figure} \\caption{text} \\label{text} \\includegraphics[width=\\textwidth]{figure.png} \\end{figure} Three"
+
+  text_stats_percent_chr_out <- text_stats_chr(text_with_figures)
+  expect_equal(text_stats_percent_chr_out[3],
+               "|Word count      |3         |3             |")
+})
+
+
 test_that("Word count is a single integer for a Rmd file when using word_count", {
   # test that we can word count on a file
   the_rmd_word_count <- word_count(filename = test_path("test_wordcountaddin.Rmd"))
