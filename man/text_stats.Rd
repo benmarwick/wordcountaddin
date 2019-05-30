@@ -13,11 +13,11 @@ text_stats(filename = this_filename())
 
 word_count(filename = this_filename())
 
-readability(filename = this_filename())
+readability(filename = this_filename(), quiet = TRUE)
 
 text_stats_chr(text)
 
-readability_chr(text)
+readability_chr(text, quiet = TRUE)
 
 text_stats_fn_(text)
 }
