@@ -13,7 +13,7 @@ Authors@R: c(person("Ben", "Marwick",
                   role = "ctb"),
             person("Florian S.", "Schaffner",
                   email = "florian.schaffner@outlook.com",
-                  role = "ctb"),)
+                  role = "ctb"))
 Maintainer: Ben Marwick <benmarwick@gmail.com>
 Description: An addin for RStudio that will count the words and characters
     in a plain text document. It is designed for use with RMarkdown
