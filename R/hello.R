@@ -186,6 +186,10 @@ prep_text <- function(text){
   # don't include figures and tables inserted using plain LaTeX code
   text <- gsub("\\\\begin\\{figure\\}(.*?)\\\\end\\{figure\\}", "", text)
   text <- gsub("\\\\begin\\{table\\}(.*?)\\\\end\\{table\\}", "", text)
+ 
+  # don't count abbreviations as multiple words, but leave 
+  # the period at the end in case it's the end of a sentence
+  text <- gsub("\\.(?=[a-z]+)", "", text)
 
   # don't include LaTeX \eggs{ham}
   # how to do? problem with capturing \x
