@@ -229,7 +229,7 @@ test_that("Word count is a single integer for a Rmd file when using word_count",
   the_rmd_word_count <- word_count(filename = test_path("test_wordcountaddin.Rmd"))
 
   expect_equal(the_rmd_word_count,
-               118L)
+               117L)
 })
 
 test_that("We can handle very long strings, like citation keys", {
