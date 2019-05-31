@@ -189,7 +189,7 @@ prep_text <- function(text){
  
   # don't count abbreviations as multiple words, but leave 
   # the period at the end in case it's the end of a sentence
-  text <- gsub("\\.(?=[a-z]+)", "", text)
+  text <- gsub("\\.(?=[a-z]+)", "", text, perl = TRUE)
 
   # don't include LaTeX \eggs{ham}
   # how to do? problem with capturing \x
