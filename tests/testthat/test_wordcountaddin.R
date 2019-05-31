@@ -251,7 +251,7 @@ test_that("don't count abbreviations as multiple words, {
 
   
   # test that we can word count on a file
-  words_with_abbv <- "zero .o.n.e .t.w.o."
+  words_with_abbv <- "zero .o.n.e .t.wo."
   abbrev_count <- text_stats_chr(words_with_abbv)
 
  expect_equal( abbrev_count[3], "|Word count      |3         |3             |")
