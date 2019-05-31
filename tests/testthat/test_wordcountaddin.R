@@ -247,7 +247,7 @@ test_that("We can handle very long strings, like citation keys", {
 
 })
 
-test_that("don't count abbreviations as multiple words, {
+test_that("don't count abbreviations as multiple words", {
 
   
   # test that we can word count on a file
