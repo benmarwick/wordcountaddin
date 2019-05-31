@@ -249,10 +249,10 @@ test_that("We can handle very long strings, like citation keys", {
 
 test_that("don't count abbreviations as multiple words, {
 
-  expect_output(
-    expect_warning(
+  
   # test that we can word count on a file
- abbrev_count <- text_stats_chr("zero .o.n.e .t.w.o.")))
+  words_with_abbv <- "zero .o.n.e .t.w.o."
+  abbrev_count <- text_stats_chr(words_with_abbv)
 
  expect_equal( abbrev_count[3], "|Word count      |3         |3             |")
 
