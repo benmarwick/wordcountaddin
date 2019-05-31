@@ -168,11 +168,11 @@ test_that("Word count is correct for rmd file", {
   the_rmd_file_stats <- text_stats(filename = test_path("test_wordcountaddin.Rmd"))
 
   expect_equal(the_rmd_file_stats[3],
-               "|Word count      |118         |117           |")
+               "|Word count      |117         |116           |")
   expect_equal(the_rmd_file_stats[4],
-               "|Character count |688         |688           |")
+               "|Character count |687         |687           |")
   expect_equal(the_rmd_file_stats[5],
-               "|Sentence count  |13          |Not available |")
+               "|Sentence count  |12          |Not available |")
   expect_equal(the_rmd_file_stats[6],
                "|Reading time    |0.6 minutes |0.6 minutes   |")
 })
@@ -249,7 +249,7 @@ test_that("We can handle very long strings, like citation keys", {
 
 test_that("don't count abbreviations as multiple words", {
 
-  
+
   # test that we can word count on a file
   words_with_abbv <- "zero .o.n.e .t.wo."
   abbrev_count <- text_stats_chr(words_with_abbv)
