@@ -48,4 +48,4 @@ This package uses the travis continuous testing mechanism for R to ensure that t
 
 ## Questions or comments?
 
-Do not hesistate to open an issue in the issues tracker to raise any questions or comments about the package or these guidelines.
+Do not hesitate to open an issue in the issues tracker to raise any questions or comments about the package or these guidelines.
