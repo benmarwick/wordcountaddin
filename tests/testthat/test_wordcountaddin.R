@@ -258,6 +258,14 @@ test_that("don't count abbreviations as multiple words", {
 
 })
 
+test_that("text_to_count reads file contents as character vector", {
+  contents <- text_to_count(test_path("test_wordcountaddin.Rmd"))
 
+  expect_type(contents, "character")
+  expect_length(contents, 1)
+})
 
+test_that("text_to_count raises an error for invalid file types", {
+  expect_error(text_to_count("invalid.tif"), regexp = "works with markdown")
+})
 

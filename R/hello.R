@@ -119,33 +119,29 @@ readability_chr <- function(text, quiet = TRUE) {
 # helper fns, not exported
 
 text_to_count <- function(filename){
+  # selected text takes precedence over the filename argument:
+  # if text is selected, it is used. Otherwise, the text in filename is used
+  if (rstudioapi::isAvailable()) {
+    context <- rstudioapi::getActiveDocumentContext()
+    selection_text <- unname(unlist(context$selection)["text"])
+    text_is_selected <- nchar(selection_text) > 0
+  } else {
+    # if not running in RStudio, assume no text is selected
+    text_is_selected <- FALSE
+  }
 
-    if(nchar(filename) > 0){
-      # if a filename is supplied, check that it is a md or rmd file
-      if(!grepl(md_file_ext_regex, filename)){
-        stop(paste("The supplied file has a file extension which is not associated with markdown.",
-                   "This function only works with markdown or R markdown files.", sep = "\n  "))
-      } else {
-        # if we have an md or Rmd file, read it in as a character vector
-        paste(scan(filename, 'character', quiet = TRUE), collapse = " ")
-      }
-
-    } else  {
-
-      # if we don'thave a filename, then work with current Rmd in RStudio
-      context <- rstudioapi::getActiveDocumentContext()
-
-      # get selection text and full text of Rmd
-      selection_text <- unname(unlist(context$selection)["text"])
-      entire_document_text <- paste(scan(context$path, 'character', quiet = TRUE), collapse = " ")
-
-      # if the selection has no characters (ie. there is no selection), then count the words in the full text of the Rmd
-      if(nchar(selection_text) > 0){
-        selection_text
-      } else  {
-        entire_document_text
-      }
+  if (text_is_selected) {
+    text <- selection_text
+  } else {
+    # if no text is selected, read text from "filename" as character vector
+    is_extension_invalid <- !grepl(md_file_ext_regex, filename)
+    if (is_extension_invalid) {
+      stop(paste("The supplied file has an extension which is not associated with markdown.",
+                 "This function only works with markdown or R markdown files.", sep = "\n  "))
     }
+    text <- paste(scan(filename, 'character', quiet = TRUE), collapse = " ")
+  }
+  text
 }
 
 prep_text <- function(text){
@@ -186,8 +182,8 @@ prep_text <- function(text){
   # don't include figures and tables inserted using plain LaTeX code
   text <- gsub("\\\\begin\\{figure\\}(.*?)\\\\end\\{figure\\}", "", text)
   text <- gsub("\\\\begin\\{table\\}(.*?)\\\\end\\{table\\}", "", text)
- 
-  # don't count abbreviations as multiple words, but leave 
+
+  # don't count abbreviations as multiple words, but leave
   # the period at the end in case it's the end of a sentence
   text <- gsub("\\.(?=[a-z]+)", "", text, perl = TRUE)
 
