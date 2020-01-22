@@ -69,6 +69,7 @@ word_count <- function(filename = this_filename()){
 
 #' @rdname text_stats
 #' @description Get readability stats for selected text (excluding code chunks)
+#' @param quiet Logical. Should task be performed quietly?
 #'
 #' @details Call this addin to get readbility stats about the text
 #'
@@ -149,8 +150,14 @@ prep_text <- function(text){
   # remove all line breaks, http://stackoverflow.com/a/21781150/1036500
   text <- gsub("[\r\n]", " ", text)
 
-  # don't include front yaml
-  text <- gsub("^---.*^--- ", "", text) # make sure we only match when backticks are at the start of the line
+  # don't include yaml front matter
+  three_dashes <- unlist(gregexpr('---', text))
+  if (three_dashes[1]==1L) {
+    yaml_end <- three_dashes[2] + 2L
+    text <- substr(text, yaml_end + 1L, nchar(text))
+  } else {
+    text
+  }
 
   # don't include text in code chunks: https://regex101.com/#python
   text <- gsub("```\\{.+?\\}.+?```", "", text)
@@ -193,11 +200,9 @@ prep_text <- function(text){
 
   if(nchar(text) == 0){
     stop("You have not selected any text. Please select some text with the mouse and try again")
-  } else {
+  }
 
   return(text)
-
-  }
 
 }
 
