@@ -9,3 +9,4 @@
 ^wordcountaddin\.Rcheck$
 ^wordcountaddin.*\.tar\.gz$
 ^wordcountaddin.*\.tgz$
+.github/

@@ -26,6 +26,8 @@ text_stats_fn_(text)
 Default is the current file (when working in RStudio) or the file being
 knit (when compiling with \code{knitr}).}
 
+\item{quiet}{Logical. Should task be performed quietly?}
+
 \item{text}{a character string of text, length of one}
 }
 \description{

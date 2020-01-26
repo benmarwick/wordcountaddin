@@ -168,13 +168,13 @@ test_that("Word count is correct for rmd file", {
   the_rmd_file_stats <- text_stats(filename = test_path("test_wordcountaddin.Rmd"))
 
   expect_equal(the_rmd_file_stats[3],
-               "|Word count      |117         |116           |")
+               "|Word count      |106         |105           |")
   expect_equal(the_rmd_file_stats[4],
-               "|Character count |687         |687           |")
+               "|Character count |602         |602           |")
   expect_equal(the_rmd_file_stats[5],
-               "|Sentence count  |12          |Not available |")
+               "|Sentence count  |8           |Not available |")
   expect_equal(the_rmd_file_stats[6],
-               "|Reading time    |0.6 minutes |0.6 minutes   |")
+               "|Reading time    |0.5 minutes |0.5 minutes   |")
 })
 
 
@@ -229,7 +229,7 @@ test_that("Word count is a single integer for a Rmd file when using word_count",
   the_rmd_word_count <- word_count(filename = test_path("test_wordcountaddin.Rmd"))
 
   expect_equal(the_rmd_word_count,
-               117L)
+               106L)
 })
 
 test_that("We can handle very long strings, like citation keys", {
