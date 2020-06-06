@@ -21,6 +21,7 @@ NULL
     "\\.rmd$",
     "\\.Rmd$",
     "\\.RMD$",
+    "\\.Rmarkdown$",
   sep = "|")
 
 
