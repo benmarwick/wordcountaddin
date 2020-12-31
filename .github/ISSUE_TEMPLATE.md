@@ -1,11 +1,29 @@
-Please briefly describe your problem and what output you expect. If you have a question, please don't use this form. Instead, ask on <https://stackoverflow.com/>
-
-Please include a minimal reproducible example (AKA a reprex). If you've never heard of a [reprex](https://reprex.tidyverse.org/) before, start by reading <https://www.tidyverse.org/help/#reprex>.
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: ''
+assignees: ''
 
 ---
 
-Brief description of the problem
+**Please wait for some discussion of your report before making a Pull Request.**
 
-```r
-# insert reprex here
-```
+**Describe the bug**
+A clear and concise description of what the bug is.
+
+**To Reproduce**
+
+Please include a minimal reproducible example (AKA a reprex). If you've never heard of a [reprex](http://reprex.tidyverse.org/) before, start by reading <https://www.tidyverse.org/help/#reprex>.
+
+Describe the steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
+
+**Expected behavior**
+A clear and concise description of what you expected to happen.
+
+**Session Info**
+Output of `sessionInfo()` on your device so we can see what packages and version numbers you have
