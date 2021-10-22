@@ -162,10 +162,13 @@ test_that("we can ignore <br> and </br>", {
   expect_equal(n_sentences_korp_r, 0)
 })
 
+test_that("we can ignore HTML tags but keep greater/less", {
+  #  test for <br>
+  string_gr_ls <- "Hi, <br> I am <20 but >10 years old"
 
-
-
-
+  expect_equal(prep_text(string_gr_ls),
+               "Hi,  I am <20 but >10 years old")
+})
 
 test_that("Word count is correct for rmd file", {
   # test that we can word count on a file
