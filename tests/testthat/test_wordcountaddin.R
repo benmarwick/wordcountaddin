@@ -163,11 +163,10 @@ test_that("we can ignore <br> and </br>", {
 })
 
 test_that("we can ignore HTML tags but keep greater/less", {
-  #  test for <br>
   string_gr_ls <- "Hi, <br> I am <20 but >10 years old"
 
   expect_equal(prep_text(string_gr_ls),
-               "Hi,  I am <20 but >10 years old")
+               "Hi,  I am 20 but 10 years old")
 })
 
 test_that("Word count is correct for rmd file", {
@@ -175,13 +174,13 @@ test_that("Word count is correct for rmd file", {
   the_rmd_file_stats <- text_stats(filename = test_path("test_wordcountaddin.Rmd"))
 
   expect_equal(the_rmd_file_stats[3],
-               "|Word count      |110         |107           |")
+               "|Word count      |108         |107           |")
   expect_equal(the_rmd_file_stats[4],
-               "|Character count |630         |630           |")
+               "|Character count |628         |628           |")
   expect_equal(the_rmd_file_stats[5],
                "|Sentence count  |9           |Not available |")
   expect_equal(the_rmd_file_stats[6],
-               "|Reading time    |0.6 minutes |0.5 minutes   |")
+               "|Reading time    |0.5 minutes |0.5 minutes   |")
 })
 
 
@@ -236,7 +235,7 @@ test_that("Word count is a single integer for a Rmd file when using word_count",
   the_rmd_word_count <- word_count(filename = test_path("test_wordcountaddin.Rmd"))
 
   expect_equal(the_rmd_word_count,
-               110L)
+               108L)
 })
 
 test_that("We can handle very long strings, like citation keys", {

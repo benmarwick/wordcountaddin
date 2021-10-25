@@ -202,6 +202,9 @@ prep_text <- function(text){
   # don't include closing html tags
   text <- gsub("</.+?>", "", text)
 
+  # don't include greater/less than signs because they trip up koRpus
+  text <- gsub("<|>", "", text)
+
   # don't include percent signs because they trip up stringi
   text <- gsub("%", "", text)
 
