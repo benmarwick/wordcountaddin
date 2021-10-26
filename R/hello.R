@@ -172,11 +172,11 @@ prep_text <- function(text){
   # don't include LaTeX comments
   # how to do this? %%
 
-  # don't include inline markdown URLs
-  text <- gsub("\\(http.+?\\)", "", text)
-
   # don't include images with captions
   text <- gsub("!\\[.+?\\)", "", text)
+
+  # don't include inline markdown URLs
+  text <- gsub("\\(http.+?\\)", "", text)
 
   # don't include # for headings
   text <- gsub("#*", "", text)
