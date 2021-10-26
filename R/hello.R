@@ -311,10 +311,11 @@ readability_fn_ <- function(text, quiet = TRUE){
   oldw <- getOption("warn")
   options(warn = -1)
 
+  require("koRpus.lang.en", quietly = TRUE)
+
   # korpus methods
   k1 <- prep_text_korpus(text)
   k_readability <- koRpus::readability(k1, quiet = TRUE)
-
 
   return(k_readability)
 
