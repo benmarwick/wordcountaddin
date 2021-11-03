@@ -16,7 +16,11 @@ Authors@R: c(person("Ben", "Marwick",
                   role = "ctb"),
             person("Matthew T.", "Warkentin",
                    email = "warkentin@lunenfeld.ca",
-                   role = "ctb"))
+                   role = "ctb"),
+            person("Luke A.", "McGuinness",
+                  email = "luke.a.mcguinness@gmail.com",
+                  role = "ctb",
+                  comment = c(ORCID = "0000-0001-8730-9761")))
 Maintainer: Ben Marwick <benmarwick@gmail.com>
 Description: An addin for RStudio that will count the words and characters
     in a plain text document. It is designed for use with RMarkdown
@@ -38,7 +42,7 @@ Imports:
     sylly,
     sylly.en
 Encoding: UTF-8
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
 Suggests:
     covr,
     testthat
