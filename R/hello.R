@@ -174,7 +174,7 @@ prep_text <- function(text){
   # how to do this? %%
 
   # don't include images with captions
-  text <- gsub("!\\[.+?\\)", "", text)
+  text <- gsub("!\\[.+?\\]", "", text)
 
   # don't include inline markdown URLs
   text <- gsub("\\(http.+?\\)", "", text)
