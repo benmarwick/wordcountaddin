@@ -221,6 +221,10 @@ prep_text <- function(text){
   # don't include LaTeX \eggs{ham}
   # how to do? problem with capturing \x
 
+  # remove lines starting with :::
+  text <- gsub(":::.*", "", text)
+ 
+
 
   if(nchar(text) == 0){
     stop("You have not selected any text. Please select some text with the mouse and try again")
