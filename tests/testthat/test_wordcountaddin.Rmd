@@ -40,3 +40,13 @@ This Markdown file contains `r wordcountaddin::word_count()` words:
 ```{r, message=FALSE, echo=FALSE, error=TRUE}
 wordcountaddin::text_stats()
 ```
+
+
+::: {.cell layout-align="center"}
+
+:::
+
+::: {.cell layout-align="center"}
+::: {.cell-output-display}
+:::
+:::
