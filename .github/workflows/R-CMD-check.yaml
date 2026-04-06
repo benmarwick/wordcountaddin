@@ -1,0 +1,23 @@
+name: R-CMD-check
+
+on: [push, pull_request]
+
+jobs:
+  R-CMD-check:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        R: ["4.0", "4.1", "4.2", "4.3"]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up R
+      uses: r-lib/actions/setup-R@v2
+      with:
+        R-version: ${{ matrix.R }}
+    - name: Install dependencies
+      run: |
+        install.packages('remotes')
+        remotes::install_deps(dependencies = TRUE)
+    - name: Run tests
+      run: R -e 'library(testthat); test_dir("tests/testthat")'
