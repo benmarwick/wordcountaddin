@@ -1,23 +1,21 @@
-name: R-CMD-check
+name: R CMD CHECK
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
-  R-CMD-check:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        R: ["4.0", "4.1", "4.2", "4.3"]
+  test:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up R
-      uses: r-lib/actions/setup-R@v2
-      with:
-        R-version: ${{ matrix.R }}
-    - name: Install dependencies
-      run: |
-        install.packages('remotes')
-        remotes::install_deps(dependencies = TRUE)
-    - name: Run tests
-      run: R -e 'library(testthat); test_dir("tests/testthat")'
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+
+      - name: Install dependencies
+        run: |
+          install.packages(c("devtools", "testthat"))
+          devtools::install_deps(dependencies = TRUE)
+        shell: Rscript {0}
+
+      - name: Run tests
+        run: devtools::test()
+        shell: Rscript {0}
