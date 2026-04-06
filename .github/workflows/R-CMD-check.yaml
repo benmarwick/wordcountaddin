@@ -18,7 +18,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages(c("pak", "testthat"))
+          install.packages(c("pak", "devtools", "testthat"))
           pak::local_install_deps()
         shell: Rscript {0}
 
