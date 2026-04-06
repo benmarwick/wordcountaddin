@@ -222,7 +222,7 @@ prep_text <- function(text){
   # how to do? problem with capturing \x
 
   # remove lines starting with :::
-  text <- gsub(":::.*", "", text)
+  text <- gsub(":::.*$", "", text, perl = TRUE)
  
 
 
