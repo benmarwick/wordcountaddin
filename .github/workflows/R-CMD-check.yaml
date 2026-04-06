@@ -18,8 +18,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages(c("devtools", "testthat"))
-          devtools::install_deps(dependencies = TRUE)
+          install.packages(c("pak", "testthat"))
+          pak::local_install_deps()
         shell: Rscript {0}
 
       - name: Run tests
