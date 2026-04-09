@@ -149,6 +149,10 @@ text_to_count <- function(filename){
 
 prep_text <- function(text){
 
+  # remove lines starting with :::
+  # we do this before removing line breaks so $ matches end of line
+  text <- gsub("(?m)^:::.*$", "", text, perl = TRUE)
+
   # remove all line breaks, http://stackoverflow.com/a/21781150/1036500
   text <- gsub("[\r\n]", " ", text)
 
@@ -220,11 +224,6 @@ prep_text <- function(text){
 
   # don't include LaTeX \eggs{ham}
   # how to do? problem with capturing \x
-
-  # remove lines starting with :::
-  text <- gsub(":::.*$", "", text, perl = TRUE)
- 
-
 
   if(nchar(text) == 0){
     stop("You have not selected any text. Please select some text with the mouse and try again")

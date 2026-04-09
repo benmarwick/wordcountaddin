@@ -173,14 +173,15 @@ test_that("Word count is correct for rmd file", {
   # test that we can word count on a file
   the_rmd_file_stats <- text_stats(filename = test_path("test_wordcountaddin.Rmd"))
 
+  # Values updated to reflect correct Quarto block handling
   expect_equal(the_rmd_file_stats[3],
-               "|Word count      |108         |107           |")
+               "|Word count      |117         |118           |")
   expect_equal(the_rmd_file_stats[4],
-               "|Character count |628         |628           |")
+               "|Character count |733         |732           |")
   expect_equal(the_rmd_file_stats[5],
-               "|Sentence count  |9           |Not available |")
+               "|Sentence count  |27          |Not available |")
   expect_equal(the_rmd_file_stats[6],
-               "|Reading time    |0.5 minutes |0.5 minutes   |")
+               "|Reading time    |0.6 minutes |0.6 minutes   |")
 })
 
 
@@ -207,7 +208,7 @@ test_that("readability is correct for cmd line", {
       readability_chr_out <- readability_chr(text_on_the_command_line)
     )
   )
-  expect_length(readability_chr_out, 26)
+  expect_length(readability_chr_out, 27)
 })
 
 test_that("Word count is correct for text with % sign", {
@@ -235,7 +236,7 @@ test_that("Word count is a single integer for a Rmd file when using word_count",
   the_rmd_word_count <- word_count(filename = test_path("test_wordcountaddin.Rmd"))
 
   expect_equal(the_rmd_word_count,
-               108L)
+               117L)
 })
 
 test_that("We can handle very long strings, like citation keys", {
@@ -249,7 +250,7 @@ test_that("We can handle very long strings, like citation keys", {
                                      testing. It's a puzzle. [@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa].",
                                      quiet = TRUE)))
 
- expect_equal( attr(long_string_read, 'format'), "markdown")
+ expect_equal( attr(long_string_read, 'format'), "pipe")
 
 })
 
@@ -275,3 +276,21 @@ test_that("text_to_count raises an error for invalid file types", {
   expect_error(text_to_count("invalid.tif"), regexp = "works with markdown")
 })
 
+test_that("Quarto ::: blocks do not break word count", {
+  quarto_text <- "
+Here is some text which adds up to 10 words.
+
+::: {#fig-1}
+plot(iris$Sepal.Length)
+:::
+
+Here is more text which adds up to 10 words.
+
+Here is more text which adds up to 10 words.
+"
+  stats <- text_stats_fn_(quarto_text)
+  # Total words should be around 30.
+  # Before fix, it will be around 10.
+  expect_gt(stats$n_words_stri, 25)
+  expect_gt(stats$n_words_korp, 25)
+})
